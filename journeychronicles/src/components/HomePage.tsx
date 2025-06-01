@@ -1,5 +1,11 @@
-const HomePage: any = ({ title = "Blah" }) => {
-  return <div>{title}</div>;
+import Fetch from "../utilities/fetch";
+
+const HomePage: React.FC = () => {
+  return (
+    <>
+      <Fetch />
+    </>
+  );
 };
 
 export default HomePage;
