@@ -19,7 +19,7 @@ const Fetch: React.FC = () => {
           "https://public-api.wordpress.com/rest/v1.1/sites/journeychronicles4.wordpress.com/posts/"
         );
 
-        setPosts(response.data.posts); // this is an array
+        setPosts(response.data.posts);
       } catch (err: any) {
         setError(err.message);
       } finally {
