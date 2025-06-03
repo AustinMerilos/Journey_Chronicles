@@ -16,7 +16,7 @@ const Fetch: React.FC = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          "https://public-api.wordpress.com/rest/v1.1/sites/journeychronicles4.wordpress.com/posts/"
+          "https://public-api.wordpress.com/rest/v1.1/sites/journeychronicles4.wordpress.com/posts/?slug=hello-world"
         );
 
         setPosts(response.data.posts);

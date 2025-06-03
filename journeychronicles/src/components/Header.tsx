@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({
   children,
 }) => {
   return (
-    <div className="flex">
+    <div>
       <SidebarNav items={navItems} logo={logo} />
       <main>
         <h2>{companyName}</h2>
