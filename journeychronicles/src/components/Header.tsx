@@ -1,5 +1,6 @@
 import React from "react";
 import SidebarNav from "./SidebarNav";
+import { MainContent } from "../styles/MainContentStyles";
 
 type LayoutProps = {
   blurb?: string;
@@ -23,14 +24,14 @@ const Layout: React.FC<LayoutProps> = ({
   children,
 }) => {
   return (
-    <div>
+    <MainContent>
       <SidebarNav items={navItems} logo={logo} />
       <main>
         <h2>{companyName}</h2>
         <p>{blurb}</p>
         {children}
       </main>
-    </div>
+    </MainContent>
   );
 };
 
