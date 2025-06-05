@@ -20,7 +20,7 @@ const logo = <h1>Logo image</h1>;
 
 const Layout: React.FC<LayoutProps> = ({
   companyName = "Journey Chronicles",
-  blurb = "Just random text should be here explaining the blog I guess",
+  blurb = "Just random text should be here explaining the blog",
   children,
 }) => {
   return (

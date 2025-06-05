@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { MainContent } from "../styles/MainContentStyles";
+import {
+  HomePageCard,
+  HomePageCardTitle,
+  MainContent,
+} from "../styles/MainContentStyles";
 
 interface Post {
   ID: number;
@@ -35,14 +39,14 @@ const HompePage: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <MainContent>
+    <div>
       {posts.map((post) => (
-        <div key={post.ID} style={{ marginBottom: "2rem" }}>
-          <h2 dangerouslySetInnerHTML={{ __html: post.title }} />
+        <HomePageCard key={post.ID} style={{ marginBottom: "2rem" }}>
+          <HomePageCardTitle dangerouslySetInnerHTML={{ __html: post.title }} />
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        </div>
+        </HomePageCard>
       ))}
-    </MainContent>
+    </div>
   );
 };
 
