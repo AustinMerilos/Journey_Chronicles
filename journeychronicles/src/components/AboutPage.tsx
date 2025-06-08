@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  AboutPageMainContent,
-  AboutPageText,
-  Card,
-  CardContent,
-  CardImage,
-  CardTitle,
+  AboutContainer,
+  ContactButton,
+  CTAContainer,
+  Paragraph,
+  ProfileImage,
+  Section,
+  SectionTitle,
+  Subtitle,
+  Title,
 } from "../styles/AboutPageStyles";
 
 const AboutPage = () => {
@@ -36,6 +39,9 @@ const AboutPage = () => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(contentHtml, "text/html");
 
+  const titles = Array.from(doc.querySelectorAll("h1")).map(
+    (h1) => h1.innerHTML
+  );
   const paragraphs = Array.from(doc.querySelectorAll("p")).map(
     (p) => p.innerHTML
   );
@@ -46,19 +52,36 @@ const AboutPage = () => {
   }));
 
   return (
-    <AboutPageMainContent>
-      <CardTitle>{title}</CardTitle>
-      <Card>
-        <CardContent>
-          {paragraphs.map((html, i) => (
-            <AboutPageText key={i} dangerouslySetInnerHTML={{ __html: html }} />
-          ))}
-          {images.map(({ src, alt }, i) => (
-            <CardImage key={i} src={src} alt={alt} />
-          ))}
-        </CardContent>
-      </Card>
-    </AboutPageMainContent>
+    <AboutContainer>
+      <Title>About Us</Title>
+      {titles.map((html, i) => (
+        <Subtitle key={i} dangerouslySetInnerHTML={{ __html: html }} />
+      ))}
+
+      {images.map(({ src, alt }, i) => (
+        <ProfileImage key={i} src={src} alt={alt} />
+      ))}
+
+      <Section>
+        <SectionTitle>Who We Are</SectionTitle>
+        {paragraphs.map((html, i) => (
+          <Paragraph key={i} dangerouslySetInnerHTML={{ __html: html }} />
+        ))}
+      </Section>
+
+      <Section>
+        <SectionTitle>Our Mission</SectionTitle>
+        <Paragraph>
+          Our mission is to create accessible, elegant, and meaningful solutions
+          that empower individuals and organizations. We believe in simplicity,
+          transparency, and impact-driven work.
+        </Paragraph>
+      </Section>
+
+      <CTAContainer>
+        <ContactButton>Get in Touch</ContactButton>
+      </CTAContainer>
+    </AboutContainer>
   );
 };
 
