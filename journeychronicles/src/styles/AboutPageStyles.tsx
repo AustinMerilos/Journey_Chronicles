@@ -1,49 +1,79 @@
 import { styled } from "styled-components";
+import { theme } from "./Constants";
 
-export const AboutPageMainContent = styled.main`
-  padding: 1rem;
+const AboutContainer = styled.main`
+  padding: 4rem 2rem;
+  background-color: white;
+  min-height: 100vh;
 `;
-export const AboutPageTitles = styled.div``;
-export const AboutPageText = styled.div`
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #333;
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  color: ${theme.colors.orange};
   margin-bottom: 1rem;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-`;
-export const AboutPageImages = styled.img`
-  maxwidth: 100%;
-  marginbottom: 1rem;
 `;
 
-export const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin: 1rem 12rem;
-  max-width: 1000px;
+const Subtitle = styled.p`
+  font-size: 1.2rem;
+  color: ${theme.colors.softYellow};
+  margin-bottom: 3rem;
+  max-width: 600px;
 `;
 
-export const CardImage = styled.img`
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+const Section = styled.section`
+  margin-bottom: 3rem;
 `;
 
-export const CardContent = styled.div`
-  padding: 1rem;
+const SectionTitle = styled.h2`
+  font-size: 1.75rem;
+  color: ${theme.colors.darkGreen};
+  margin-bottom: 1rem;
 `;
 
-export const CardTitle = styled.h2`
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-`;
-
-export const CardText = styled.p`
+const Paragraph = styled.p`
   font-size: 1rem;
-  color: #555;
   line-height: 1.6;
+  color: ${theme.colors.darkGreen};
 `;
+
+const ProfileImage = styled.img`
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  border: 4px solid ${theme.colors.softYellow};
+`;
+
+const CTAContainer = styled.div`
+  margin-top: 4rem;
+  text-align: center;
+`;
+
+const ContactButton = styled.button`
+  background-color: ${theme.colors.orange};
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: ${theme.colors.softYellow};
+    color: ${theme.colors.darkGreen};
+  }
+`;
+
+export {
+  AboutContainer,
+  Title,
+  Subtitle,
+  Section,
+  SectionTitle,
+  Paragraph,
+  ProfileImage,
+  CTAContainer,
+  ContactButton,
+};
