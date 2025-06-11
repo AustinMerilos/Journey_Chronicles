@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "motion/react";
+import { FaMountain } from "react-icons/fa";
 
 import {
   Aside,
@@ -50,6 +51,7 @@ const SidebarNav: React.FC<NavBarProps> = ({ items, logo }) => {
             whileTap={{ scale: 0.95 }}
           >
             <NavLink to={href}>
+              <FaMountain />
               {icon && <IconWrapper>{icon}</IconWrapper>}
               {label}
             </NavLink>
