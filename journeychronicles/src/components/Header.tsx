@@ -1,6 +1,7 @@
 import React from "react";
 import SidebarNav from "./SidebarNav";
 import { MainContent } from "../styles/MainContentStyles";
+import { FaInfoCircle, FaMountain } from "react-icons/fa";
 
 type LayoutProps = {
   blurb?: string;
@@ -9,11 +10,11 @@ type LayoutProps = {
 };
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Destinations", href: "/destinations" },
-  { label: "Travel Tips", href: "/tips" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/", icon: <FaMountain /> },
+  { label: "Destinations", href: "/destinations", icon: <FaMountain /> },
+  { label: "Travel Tips", href: "/tips", icon: <FaMountain /> },
+  { label: "About", href: "/about", icon: <FaMountain /> },
+  { label: "Contact", href: "/contact", icon: <FaInfoCircle /> },
 ];
 
 const logo = <h1>Logo image</h1>;
