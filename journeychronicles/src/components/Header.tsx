@@ -2,7 +2,6 @@ import React from "react";
 import SidebarNav from "./SidebarNav";
 import { MainContent } from "../styles/MainContentStyles";
 import { FaInfoCircle, FaMountain } from "react-icons/fa";
-import images from "../assets";
 
 type LayoutProps = {
   blurb?: string;
@@ -18,13 +17,7 @@ const navItems = [
   { label: "Contact", href: "/contact", icon: <FaInfoCircle /> },
 ];
 
-const logo = (
-  <img
-    alt="logo"
-    src={images.logo}
-    style={{ width: "100%", borderRadius: "7.5rem" }}
-  />
-);
+const logo = <h1>Logo image</h1>;
 
 const Layout: React.FC<LayoutProps> = ({
   companyName = "Journey Chronicles",
