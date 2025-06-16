@@ -22,22 +22,15 @@ export const Aside = styled.aside`
 
 export const LogoContainer = styled.div`
   margin-bottom: 2.5rem;
-  font-size: 2rem;
-  font-weight: 900;
   background: linear-gradient(
     135deg,
     ${theme.colors.orange},
     ${theme.colors.softYellow}
   );
-  color: ${theme.colors.darkGreen};
   padding: 1rem 1.25rem;
   border-radius: 1rem;
-  text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  letter-spacing: 1px;
-  text-transform: uppercase;
   transition: all 0.3s ease;
-
   &:hover {
     transform: scale(1.03) rotate(-1deg);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
