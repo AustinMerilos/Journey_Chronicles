@@ -50,7 +50,7 @@ const SidebarNav: React.FC<NavBarProps> = ({ items, logo }) => {
             whileTap={{ scale: 0.95 }}
           >
             <NavLink to={href} $borderColor={border}>
-              {icon && <IconWrapper>{icon}</IconWrapper>}
+              <IconWrapper>{icon}</IconWrapper>
               {label}
             </NavLink>
           </motion.li>

@@ -22,12 +22,26 @@ export const Aside = styled.aside`
 
 export const LogoContainer = styled.div`
   margin-bottom: 2.5rem;
-  font-size: 1.75rem;
-  font-weight: 800;
-  background-color: ${theme.colors.orange};
-  padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
+  font-size: 2rem;
+  font-weight: 900;
+  background: linear-gradient(
+    135deg,
+    ${theme.colors.orange},
+    ${theme.colors.softYellow}
+  );
+  color: ${theme.colors.darkGreen};
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
   text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const NavList = styled.ul`
@@ -56,6 +70,7 @@ export const NavLink = styled(Link)<NavLinkProps>`
     background: ${theme.colors.softYellow};
     color: ${theme.colors.darkGreen};
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.03) rotate(-1deg);
   }
 `;
 
