@@ -1,17 +1,18 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Aside,
   IconWrapper,
   LogoContainer,
   NavList,
+  NavLink,
 } from "../styles/SidebarNavStyles";
 
 type NavItem = {
   label: string;
   href: string;
   icon?: React.ReactNode;
+  border?: string;
 };
 
 type NavBarProps = {
@@ -41,14 +42,14 @@ const SidebarNav: React.FC<NavBarProps> = ({ items, logo }) => {
     <Aside>
       <LogoContainer>{logo}</LogoContainer>
       <NavList>
-        {items.map(({ label, href, icon }) => (
+        {items.map(({ label, href, icon, border }) => (
           <motion.li
             key={label}
             variants={itemVariants}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <NavLink to={href}>
+            <NavLink to={href} $borderColor={border}>
               {icon && <IconWrapper>{icon}</IconWrapper>}
               {label}
             </NavLink>

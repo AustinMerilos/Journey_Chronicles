@@ -2,7 +2,12 @@ import React from "react";
 import SidebarNav from "./SidebarNav";
 import { MainContent } from "../styles/MainContentStyles";
 import { FaInfoCircle, FaMountain } from "react-icons/fa";
+import { MdOutlineTipsAndUpdates } from "react-icons/md";
+import { MdOutlineCabin } from "react-icons/md";
+import { IoMdContact } from "react-icons/io";
+
 import images from "../assets";
+import { theme } from "../styles/Constants";
 
 type LayoutProps = {
   blurb?: string;
@@ -11,18 +16,43 @@ type LayoutProps = {
 };
 
 const navItems = [
-  { label: "Home", href: "/", icon: <FaMountain /> },
-  { label: "Destinations", href: "/destinations", icon: <FaMountain /> },
-  { label: "Travel Tips", href: "/tips", icon: <FaMountain /> },
-  { label: "About", href: "/about", icon: <FaMountain /> },
-  { label: "Contact", href: "/contact", icon: <FaInfoCircle /> },
+  {
+    label: "Home",
+    href: "/",
+    icon: <MdOutlineCabin />,
+    border: theme.colors.lightYellow,
+  },
+  {
+    label: "Destinations",
+    href: "/destinations",
+    icon: <FaMountain />,
+    border: theme.colors.orange,
+  },
+  {
+    label: "Travel Tips",
+    href: "/tips",
+    icon: <MdOutlineTipsAndUpdates />,
+    border: theme.colors.softYellow,
+  },
+  {
+    label: "About",
+    href: "/about",
+    icon: <FaInfoCircle />,
+    border: theme.colors.orange,
+  },
+  {
+    label: "Contact",
+    href: "/contact",
+    icon: <IoMdContact />,
+    border: theme.colors.orange,
+  },
 ];
 
 const logo = (
   <img
     alt="logo"
     src={images.logo}
-    style={{ width: "100%", borderRadius: "7.5rem" }}
+    style={{ width: "100%", borderRadius: "3.5rem" }}
   />
 );
 
