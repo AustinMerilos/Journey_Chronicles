@@ -1,4 +1,5 @@
 import React from "react";
+import { FooterContainer } from "../styles/Footer";
 
 type FooterProps = {
   year?: number;
@@ -10,11 +11,11 @@ const Footer: React.FC<FooterProps> = ({
   companyName = "Journey Chronicles",
 }) => {
   return (
-    <footer>
+    <FooterContainer>
       <p>
         &copy; {year} {companyName}. All rights reserved.
       </p>
-    </footer>
+    </FooterContainer>
   );
 };
 

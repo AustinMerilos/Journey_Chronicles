@@ -8,6 +8,7 @@ import { IoMdContact } from "react-icons/io";
 
 import images from "../assets";
 import { theme } from "../styles/Constants";
+import Footer from "./Footer";
 
 type LayoutProps = {
   blurb?: string;
@@ -62,14 +63,17 @@ const Layout: React.FC<LayoutProps> = ({
   children,
 }) => {
   return (
-    <MainContent>
-      <SidebarNav items={navItems} logo={logo} />
-      <main>
-        <h2>{companyName}</h2>
-        <p>{blurb}</p>
-        {children}
-      </main>
-    </MainContent>
+    <>
+      <MainContent>
+        <SidebarNav items={navItems} logo={logo} />
+        <main>
+          <h2>{companyName}</h2>
+          <p>{blurb}</p>
+          {children}
+        </main>
+      </MainContent>
+      <Footer />
+    </>
   );
 };
 
