@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink as RouterNavLink } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "./Constants";
 
@@ -46,7 +46,7 @@ export const NavList = styled.ul`
   list-style: none;
 `;
 
-export const NavLink = styled(Link)<NavLinkProps>`
+export const NavLink = styled(RouterNavLink)<NavLinkProps>`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -64,6 +64,12 @@ export const NavLink = styled(Link)<NavLinkProps>`
     color: ${theme.colors.darkGreen};
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transform: scale(1.03) rotate(-1deg);
+  }
+
+  &.active {
+    color: ${theme.colors.orange};
+    background-color: ${theme.colors.lightYellow};
+    font-weight: bold;
   }
 `;
 
