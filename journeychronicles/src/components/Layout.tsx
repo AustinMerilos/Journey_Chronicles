@@ -20,7 +20,7 @@ const navItems = [
     label: "Home",
     href: "/",
     icon: <MdOutlineCabin />,
-    border: theme.colors.lightYellow,
+    border: theme.colors.softYellow,
   },
   {
     label: "Destinations",
@@ -44,7 +44,7 @@ const navItems = [
     label: "Contact",
     href: "/contact",
     icon: <IoMdContact />,
-    border: theme.colors.orange,
+    border: theme.colors.softYellow,
   },
 ];
 
