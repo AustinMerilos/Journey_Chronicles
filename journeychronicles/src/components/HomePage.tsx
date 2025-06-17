@@ -3,16 +3,21 @@ import axios from "axios";
 import {
   HomePageCard,
   HomePageCardTitle,
-  MainContent,
+  PostDate,
+  PostImage,
+  PostParagraph,
+  ReadMoreLink,
 } from "../styles/MainContentStyles";
 
 interface Post {
   ID: number;
   title: string;
   content: string;
+  date: string;
+  URL: string;
 }
 
-const HompePage: React.FC = () => {
+const HomePage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,9 +26,8 @@ const HompePage: React.FC = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          "https://public-api.wordpress.com/rest/v1.1/sites/journeychronicles4.wordpress.com/posts/?slug=hello-world"
+          "https://public-api.wordpress.com/rest/v1.1/sites/journeychronicles4.wordpress.com/posts"
         );
-
         setPosts(response.data.posts);
       } catch (err: any) {
         setError(err.message);
@@ -40,14 +44,50 @@ const HompePage: React.FC = () => {
 
   return (
     <div>
-      {posts.map((post) => (
-        <HomePageCard key={post.ID} style={{ marginBottom: "2rem" }}>
-          <HomePageCardTitle dangerouslySetInnerHTML={{ __html: post.title }} />
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        </HomePageCard>
-      ))}
+      {posts.map((post) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(post.content, "text/html");
+
+        const imageElement = doc.querySelector("img");
+        const imageSrc = imageElement?.getAttribute("src");
+
+        const paragraphElement = doc.querySelector("p");
+        const paragraphHTML = paragraphElement?.innerHTML || "";
+
+        return (
+          <HomePageCard key={post.ID} style={{ marginBottom: "2rem" }}>
+            {imageSrc && <PostImage src={imageSrc} alt="Post visual" />}
+
+            <PostDate>
+              {new Date(post.date).toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </PostDate>
+
+            <HomePageCardTitle
+              dangerouslySetInnerHTML={{ __html: post.title }}
+            />
+
+            {paragraphHTML && (
+              <PostParagraph
+                dangerouslySetInnerHTML={{ __html: `<p>${paragraphHTML}</p>` }}
+              />
+            )}
+
+            <ReadMoreLink
+              href={post.URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read More →
+            </ReadMoreLink>
+          </HomePageCard>
+        );
+      })}
     </div>
   );
 };
 
-export default HompePage;
+export default HomePage;
