@@ -6,6 +6,7 @@ import {
   LogoContainer,
   NavList,
   NavLink,
+  Label,
 } from "../styles/SidebarNavStyles";
 
 type NavItem = {
@@ -18,6 +19,7 @@ type NavItem = {
 type NavBarProps = {
   items: NavItem[];
   logo?: React.ReactNode;
+  collapsed: boolean;
 };
 
 const itemVariants = {
@@ -37,10 +39,10 @@ const itemVariants = {
   },
 };
 
-const SidebarNav: React.FC<NavBarProps> = ({ items, logo }) => {
+const SidebarNav: React.FC<NavBarProps> = ({ items, logo, collapsed }) => {
   return (
-    <Aside>
-      <LogoContainer>{logo}</LogoContainer>
+    <Aside $collapsed={collapsed}>
+      <LogoContainer>{!collapsed && logo}</LogoContainer>
       <NavList>
         {items.map(({ label, href, icon, border }) => (
           <motion.li
@@ -51,7 +53,7 @@ const SidebarNav: React.FC<NavBarProps> = ({ items, logo }) => {
           >
             <NavLink to={href} $borderColor={border}>
               <IconWrapper>{icon}</IconWrapper>
-              {label}
+              {!collapsed && <Label>{label}</Label>}
             </NavLink>
           </motion.li>
         ))}

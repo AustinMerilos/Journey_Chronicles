@@ -6,18 +6,31 @@ interface NavLinkProps {
   $borderColor?: string;
 }
 
-export const Aside = styled.aside`
-  width: 16rem;
+export const Aside = styled.aside<{ $collapsed?: boolean }>`
+  width: ${({ $collapsed }) => ($collapsed ? "60px" : "250px")};
+  transition: width 0.3s ease;
+  background-color: ${theme.colors.darkGreen};
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: ${theme.colors.darkGreen};
-  color: ${theme.colors.lightYellow};
+  border-right: 1px solid #eee;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1.5rem;
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+`;
+
+export const Label = styled.span`
+  font-size: 1rem;
+  white-space: nowrap;
+`;
+
+export const IconWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  margin-right: 1rem;
 `;
 
 export const LogoContainer = styled.div`
@@ -71,14 +84,4 @@ export const NavLink = styled(RouterNavLink)<NavLinkProps>`
     background-color: ${theme.colors.lightYellow};
     font-weight: bold;
   }
-`;
-
-export const IconWrapper = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${theme.colors.softYellow};
-  border-radius: 50%;
-  padding: 0.5rem;
-  font-size: 1.25rem;
 `;
