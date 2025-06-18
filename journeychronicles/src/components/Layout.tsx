@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SidebarNav from "./SidebarNav";
 import { FaInfoCircle, FaMountain } from "react-icons/fa";
 import { MdOutlineTipsAndUpdates, MdOutlineCabin } from "react-icons/md";
@@ -61,16 +61,44 @@ const Layout: React.FC<LayoutProps> = ({
   blurb = "Just random text should be here explaining the blog",
   children,
 }) => {
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
     <>
-      <HeroSection>
-        <HeroText>{companyName}</HeroText>
-        <p>{blurb}</p>
-      </HeroSection>
-      <SidebarNav items={navItems} logo={logo} />
+      <button
+        onClick={() => setCollapsed((prev) => !prev)}
+        style={{
+          position: "fixed",
+          top: "1rem",
+          left: collapsed ? "60px" : "250px",
+          zIndex: 1001,
+          background: "#fff",
+          border: "1px solid #ccc",
+          padding: "0.5rem 1rem",
+          borderRadius: "0.25rem",
+          cursor: "pointer",
+          transition: "left 0.3s ease",
+        }}
+      >
+        {collapsed ? "=" : "✕"}
+      </button>
 
-      <MainContent>{children}</MainContent>
-      <Footer />
+      <SidebarNav items={navItems} logo={logo} collapsed={collapsed} />
+
+      <div
+        style={{
+          marginLeft: collapsed ? "60px" : "250px",
+          transition: "margin-left 0.3s ease",
+        }}
+      >
+        <HeroSection>
+          <HeroText>{companyName}</HeroText>
+          <p>{blurb}</p>
+        </HeroSection>
+
+        <MainContent>{children}</MainContent>
+        <Footer />
+      </div>
     </>
   );
 };
