@@ -1,14 +1,13 @@
 import React from "react";
 import SidebarNav from "./SidebarNav";
-import { MainContent } from "../styles/MainContentStyles";
 import { FaInfoCircle, FaMountain } from "react-icons/fa";
-import { MdOutlineTipsAndUpdates } from "react-icons/md";
-import { MdOutlineCabin } from "react-icons/md";
+import { MdOutlineTipsAndUpdates, MdOutlineCabin } from "react-icons/md";
 import { IoMdContact } from "react-icons/io";
 
 import images from "../assets";
 import { theme } from "../styles/Constants";
 import Footer from "./Footer";
+import { HeroSection, HeroText, MainContent } from "../styles/LayoutStyles";
 
 type LayoutProps = {
   blurb?: string;
@@ -64,14 +63,13 @@ const Layout: React.FC<LayoutProps> = ({
 }) => {
   return (
     <>
-      <MainContent>
-        <SidebarNav items={navItems} logo={logo} />
-        <main>
-          <h2>{companyName}</h2>
-          <p>{blurb}</p>
-          {children}
-        </main>
-      </MainContent>
+      <HeroSection>
+        <HeroText>{companyName}</HeroText>
+        <p>{blurb}</p>
+      </HeroSection>
+      <SidebarNav items={navItems} logo={logo} />
+
+      <MainContent>{children}</MainContent>
       <Footer />
     </>
   );

@@ -1,11 +1,6 @@
 import { styled } from "styled-components";
 import { theme } from "./Constants";
 
-export const MainContent = styled.main`
-  margin-left: 20rem;
-  padding: 1rem;
-`;
-
 export const HomePageCard = styled.div`
   background-color: ${theme.colors.lightYellow};
   padding: 2rem;
