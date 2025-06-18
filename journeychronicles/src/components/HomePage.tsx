@@ -7,7 +7,7 @@ import {
   PostImage,
   PostParagraph,
   ReadMoreLink,
-} from "../styles/MainContentStyles";
+} from "../styles/HomepageStyles";
 
 interface Post {
   ID: number;
