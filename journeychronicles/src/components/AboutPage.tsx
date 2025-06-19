@@ -53,7 +53,7 @@ const AboutPage = () => {
 
   return (
     <AboutContainer>
-      <Title>About Us</Title>
+      <Title>{title}</Title>
       {titles.map((html, i) => (
         <Subtitle key={i} dangerouslySetInnerHTML={{ __html: html }} />
       ))}

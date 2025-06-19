@@ -23,7 +23,7 @@ type LayoutProps = {
 const navItems = [
   {
     label: "Home",
-    href: "/",
+    href: "/home",
     icon: <MdOutlineCabin />,
     border: theme.colors.softYellow,
   },
