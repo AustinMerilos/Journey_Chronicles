@@ -11,6 +11,7 @@ import {
   Subtitle,
   Title,
 } from "../styles/AboutPageStyles";
+import { parseHTMLContent } from "../utils/parseHtmlContent";
 
 const AboutPage = () => {
   const [title, setTitle] = useState("");
@@ -36,24 +37,12 @@ const AboutPage = () => {
   if (loading) return <p>Loading About page...</p>;
   if (error) return <p>{error}</p>;
 
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(contentHtml, "text/html");
-
-  const titles = Array.from(doc.querySelectorAll("h1")).map(
-    (h1) => h1.innerHTML
-  );
-  const paragraphs = Array.from(doc.querySelectorAll("p")).map(
-    (p) => p.innerHTML
-  );
-
-  const images = Array.from(doc.querySelectorAll("img")).map((img) => ({
-    src: img.src,
-    alt: img.alt,
-  }));
+  const { titles, paragraphs, images } = parseHTMLContent(contentHtml);
 
   return (
     <AboutContainer>
       <Title>{title}</Title>
+
       {titles.map((html, i) => (
         <Subtitle key={i} dangerouslySetInnerHTML={{ __html: html }} />
       ))}

@@ -5,11 +5,10 @@ import {
   PostImage,
   PostParagraph,
   ReadMoreLink,
-} from "../styles/HomepageStyles";
-import {
   DestinationsPageCard,
   DestinationsPageTitle,
 } from "../styles/DestinationsPage";
+import { parseHTMLContent } from "../utils/parseHtmlContent";
 
 interface Post {
   ID: number;
@@ -47,14 +46,9 @@ const DestinationsPage: React.FC = () => {
   return (
     <div>
       {posts.map((post) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(post.content, "text/html");
-
-        const imageElement = doc.querySelector("img");
-        const imageSrc = imageElement?.getAttribute("src");
-
-        const paragraphElement = doc.querySelector("p");
-        const paragraphHTML = paragraphElement?.innerHTML || "";
+        const { images, paragraphs } = parseHTMLContent(post.content);
+        const imageSrc = images[0]?.src;
+        const paragraphHTML = paragraphs[0] || "";
 
         return (
           <DestinationsPageCard key={post.ID} style={{ marginBottom: "2rem" }}>

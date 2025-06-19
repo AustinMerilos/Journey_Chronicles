@@ -1,92 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { parseHTMLContent } from "../utils/parseHtmlContent";
 import {
-  HomePageCard,
-  HomePageCardTitle,
-  PostDate,
-  PostImage,
-  PostParagraph,
-  ReadMoreLink,
+  HomePageContainer,
+  Paragraph,
+  ProfileImage,
+  Section,
+  SectionTitle,
+  Subtitle,
+  Title,
 } from "../styles/HomepageStyles";
 
-interface Post {
-  ID: number;
-  title: string;
-  content: string;
-  date: string;
-  URL: string;
-}
-
-const HomePage: React.FC = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+const HomePage = () => {
+  const [title, setTitle] = useState("");
+  const [contentHtml, setContentHtml] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get(
-          "https://public-api.wordpress.com/rest/v1.1/sites/journeychronicles4.wordpress.com/posts"
-        );
-        setPosts(response.data.posts);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
+    axios
+      .get(
+        "https://public-api.wordpress.com/rest/v1.1/sites/journeychronicles4.wordpress.com/posts/slug:home"
+      )
+      .then((response) => {
+        setTitle(response.data.title);
+        setContentHtml(response.data.content);
+      })
+      .catch((err) => {
+        setError("Failed to fetch About page: " + err.message);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading posts...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p>Loading About page...</p>;
+  if (error) return <p>{error}</p>;
+
+  const { titles, paragraphs, images } = parseHTMLContent(contentHtml);
 
   return (
-    <div>
-      {posts.map((post) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(post.content, "text/html");
+    <HomePageContainer>
+      <Title>{title}</Title>
 
-        const imageElement = doc.querySelector("img");
-        const imageSrc = imageElement?.getAttribute("src");
+      {titles.map((html, i) => (
+        <Subtitle key={i} dangerouslySetInnerHTML={{ __html: html }} />
+      ))}
 
-        const paragraphElement = doc.querySelector("p");
-        const paragraphHTML = paragraphElement?.innerHTML || "";
+      {images.map(({ src, alt }, i) => (
+        <ProfileImage key={i} src={src} alt={alt} />
+      ))}
 
-        return (
-          <HomePageCard key={post.ID} style={{ marginBottom: "2rem" }}>
-            {imageSrc && <PostImage src={imageSrc} alt="Post visual" />}
+      <Section>
+        <SectionTitle>Who We Are</SectionTitle>
+        {paragraphs.map((html, i) => (
+          <Paragraph key={i} dangerouslySetInnerHTML={{ __html: html }} />
+        ))}
+      </Section>
 
-            <PostDate>
-              {new Date(post.date).toLocaleDateString(undefined, {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </PostDate>
-
-            <HomePageCardTitle
-              dangerouslySetInnerHTML={{ __html: post.title }}
-            />
-
-            {paragraphHTML && (
-              <PostParagraph
-                dangerouslySetInnerHTML={{ __html: `<p>${paragraphHTML}</p>` }}
-              />
-            )}
-
-            <ReadMoreLink
-              href={post.URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read More →
-            </ReadMoreLink>
-          </HomePageCard>
-        );
-      })}
-    </div>
+      <Section>
+        <SectionTitle>Home page title</SectionTitle>
+        <Paragraph>Home page paragraph</Paragraph>
+      </Section>
+    </HomePageContainer>
   );
 };
 
