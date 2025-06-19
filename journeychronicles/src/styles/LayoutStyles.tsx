@@ -6,6 +6,12 @@ export const MainContent = styled.main`
   padding: 1rem;
 `;
 
+export const ContentWrapper = styled.div<{ $collapsed: boolean }>`
+  margin-left: ${({ $collapsed }) => ($collapsed ? "60px" : "250px")};
+  transition: margin-left 0.3s ease;
+  padding: 2rem;
+`;
+
 export const HeroSection = styled.section`
   padding: 4rem 2rem 2rem 2rem;
   background: linear-gradient(

@@ -18,6 +18,7 @@ export const Aside = styled.aside<{ $collapsed?: boolean }>`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding: 15px;
 `;
 
 export const Label = styled.span`

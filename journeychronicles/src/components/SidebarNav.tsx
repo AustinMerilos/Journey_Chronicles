@@ -8,6 +8,7 @@ import {
   NavLink,
   Label,
 } from "../styles/SidebarNavStyles";
+import { FaMountainSun } from "react-icons/fa6";
 
 type NavItem = {
   label: string;
@@ -31,9 +32,10 @@ const SidebarNav: React.FC<NavBarProps> = ({
 }) => {
   return (
     <Aside $collapsed={collapsed}>
-      <LogoContainer onClick={onLogoClick} style={{ cursor: "pointer" }}>
-        {!collapsed && logo}
+      <LogoContainer onClick={onLogoClick}>
+        {collapsed ? <FaMountainSun size={24} /> : logo}
       </LogoContainer>
+
       <NavList>
         {items.map(({ label, href, icon, border }) => (
           <motion.li

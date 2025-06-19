@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import SidebarNav from "./SidebarNav";
-import { FaInfoCircle, FaMountain } from "react-icons/fa";
+import { FaInfoCircle, FaPlaneDeparture } from "react-icons/fa";
 import { MdOutlineTipsAndUpdates, MdOutlineCabin } from "react-icons/md";
 import { IoMdContact } from "react-icons/io";
 
 import images from "../assets";
 import { theme } from "../styles/Constants";
 import Footer from "./Footer";
-import { HeroSection, HeroText, MainContent } from "../styles/LayoutStyles";
+import {
+  ContentWrapper,
+  HeroSection,
+  HeroText,
+  MainContent,
+} from "../styles/LayoutStyles";
 
 type LayoutProps = {
   blurb?: string;
@@ -25,7 +30,7 @@ const navItems = [
   {
     label: "Destinations",
     href: "/destinations",
-    icon: <FaMountain />,
+    icon: <FaPlaneDeparture />,
     border: theme.colors.orange,
   },
   {
@@ -71,13 +76,7 @@ const Layout: React.FC<LayoutProps> = ({
         collapsed={collapsed}
         onLogoClick={() => setCollapsed((prev) => !prev)}
       />
-
-      <div
-        style={{
-          marginLeft: collapsed ? "60px" : "250px",
-          transition: "margin-left 0.3s ease",
-        }}
-      >
+      <ContentWrapper $collapsed={collapsed}>
         <HeroSection>
           <HeroText>{companyName}</HeroText>
           <p>{blurb}</p>
@@ -85,7 +84,7 @@ const Layout: React.FC<LayoutProps> = ({
 
         <MainContent>{children}</MainContent>
         <Footer />
-      </div>
+      </ContentWrapper>
     </>
   );
 };
