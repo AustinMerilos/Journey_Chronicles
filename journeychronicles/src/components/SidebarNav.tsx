@@ -20,34 +20,24 @@ type NavBarProps = {
   items: NavItem[];
   logo?: React.ReactNode;
   collapsed: boolean;
+  onLogoClick?: () => void;
 };
 
-const itemVariants = {
-  open: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      y: { stiffness: 1000, velocity: -100 },
-    },
-  },
-  closed: {
-    y: 50,
-    opacity: 0,
-    transition: {
-      y: { stiffness: 1000 },
-    },
-  },
-};
-
-const SidebarNav: React.FC<NavBarProps> = ({ items, logo, collapsed }) => {
+const SidebarNav: React.FC<NavBarProps> = ({
+  items,
+  logo,
+  collapsed,
+  onLogoClick,
+}) => {
   return (
     <Aside $collapsed={collapsed}>
-      <LogoContainer>{!collapsed && logo}</LogoContainer>
+      <LogoContainer onClick={onLogoClick} style={{ cursor: "pointer" }}>
+        {!collapsed && logo}
+      </LogoContainer>
       <NavList>
         {items.map(({ label, href, icon, border }) => (
           <motion.li
             key={label}
-            variants={itemVariants}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

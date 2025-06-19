@@ -65,25 +65,12 @@ const Layout: React.FC<LayoutProps> = ({
 
   return (
     <>
-      <button
-        onClick={() => setCollapsed((prev) => !prev)}
-        style={{
-          position: "fixed",
-          top: "1rem",
-          left: collapsed ? "60px" : "250px",
-          zIndex: 1001,
-          background: "#fff",
-          border: "1px solid #ccc",
-          padding: "0.5rem 1rem",
-          borderRadius: "0.25rem",
-          cursor: "pointer",
-          transition: "left 0.3s ease",
-        }}
-      >
-        {collapsed ? "=" : "✕"}
-      </button>
-
-      <SidebarNav items={navItems} logo={logo} collapsed={collapsed} />
+      <SidebarNav
+        items={navItems}
+        logo={logo}
+        collapsed={collapsed}
+        onLogoClick={() => setCollapsed((prev) => !prev)}
+      />
 
       <div
         style={{

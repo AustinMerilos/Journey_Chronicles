@@ -2,12 +2,11 @@ import { styled } from "styled-components";
 import { theme } from "./Constants";
 
 export const MainContent = styled.main`
-  margin-left: 20rem;
+  margin: 7rem;
   padding: 1rem;
 `;
 
 export const HeroSection = styled.section`
-  margin-left: 16rem;
   padding: 4rem 2rem 2rem 2rem;
   background: linear-gradient(
     to right,
