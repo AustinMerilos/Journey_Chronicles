@@ -9,7 +9,9 @@ import { theme } from "../styles/Constants";
 import Footer from "./Footer";
 import {
   ContentWrapper,
+  HeroImage,
   HeroSection,
+  HeroSubText,
   HeroText,
   MainContent,
 } from "../styles/LayoutStyles";
@@ -76,12 +78,11 @@ const Layout: React.FC<LayoutProps> = ({
         collapsed={collapsed}
         onLogoClick={() => setCollapsed((prev) => !prev)}
       />
+      <HeroSection>
+        <HeroText>{companyName}</HeroText>
+        <HeroSubText>{blurb}</HeroSubText>
+      </HeroSection>
       <ContentWrapper $collapsed={collapsed}>
-        <HeroSection>
-          <HeroText>{companyName}</HeroText>
-          <p>{blurb}</p>
-        </HeroSection>
-
         <MainContent>{children}</MainContent>
         <Footer />
       </ContentWrapper>
