@@ -6,7 +6,7 @@ interface NavLinkProps {
   $borderColor?: string;
 }
 
-export const Aside = styled.aside<{ $collapsed?: boolean }>`
+const Aside = styled.aside<{ $collapsed?: boolean }>`
   width: ${({ $collapsed }) => ($collapsed ? "60px" : "250px")};
   transition: width 0.3s ease;
   background-color: ${theme.colors.darkGreen};
@@ -21,12 +21,12 @@ export const Aside = styled.aside<{ $collapsed?: boolean }>`
   padding: 15px;
 `;
 
-export const Label = styled.span`
+const Label = styled.span`
   font-size: 1rem;
   white-space: nowrap;
 `;
 
-export const IconWrapper = styled.span`
+const IconWrapper = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,7 +34,7 @@ export const IconWrapper = styled.span`
   margin-right: 1rem;
 `;
 
-export const LogoContainer = styled.div`
+const LogoContainer = styled.div`
   margin-bottom: 2.5rem;
   background: linear-gradient(
     135deg,
@@ -51,7 +51,7 @@ export const LogoContainer = styled.div`
   }
 `;
 
-export const NavList = styled.ul`
+const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -60,7 +60,7 @@ export const NavList = styled.ul`
   list-style: none;
 `;
 
-export const NavLink = styled(RouterNavLink)<NavLinkProps>`
+const NavLink = styled(RouterNavLink)<NavLinkProps>`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -86,3 +86,5 @@ export const NavLink = styled(RouterNavLink)<NavLinkProps>`
     font-weight: bold;
   }
 `;
+
+export { NavLink, NavList, LogoContainer, Aside, Label, IconWrapper };
