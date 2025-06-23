@@ -8,22 +8,35 @@ interface NavLinkProps {
 
 const Aside = styled.aside<{ $collapsed?: boolean }>`
   width: ${({ $collapsed }) => ($collapsed ? "60px" : "250px")};
-  transition: width 0.3s ease;
   background-color: ${theme.colors.darkGreen};
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  border-right: 1px solid #eee;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: 15px;
+  transition: width 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
+  z-index: 1100;
+
+  @media (max-width: 768px) {
+    width: ${({ $collapsed }) => ($collapsed ? "0" : "200px")};
+    padding: ${({ $collapsed }) => ($collapsed ? "0" : "15px")};
+    box-shadow: ${({ $collapsed }) =>
+      $collapsed ? "none" : "4px 0 10px rgba(0,0,0,0.2)"};
+    background-color: ${({ $collapsed }) =>
+      $collapsed ? "transparent" : "rgba(22, 97, 14, 0.85)"};
+  }
 `;
 
-const Label = styled.span`
+const Label = styled.span<{ $collapsed?: boolean }>`
   font-size: 1rem;
   white-space: nowrap;
+  opacity: ${({ $collapsed }) => ($collapsed ? 0 : 1)};
+  width: ${({ $collapsed }) => ($collapsed ? "0px" : "auto")};
+  overflow: hidden;
+  transition: opacity 0.3s ease, width 0.3s ease;
 `;
 
 const IconWrapper = styled.span`
@@ -32,6 +45,10 @@ const IconWrapper = styled.span`
   justify-content: center;
   min-width: 24px;
   margin-right: 1rem;
+
+  @media (max-width: 768px) {
+    margin-right: 0.5rem;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -45,9 +62,16 @@ const LogoContainer = styled.div`
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  cursor: pointer;
+
   &:hover {
     transform: scale(1.03) rotate(-1deg);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
   }
 `;
 
@@ -58,6 +82,10 @@ const NavList = styled.ul`
   padding: 0;
   margin: 0;
   list-style: none;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const NavLink = styled(RouterNavLink)<NavLinkProps>`
@@ -84,6 +112,11 @@ const NavLink = styled(RouterNavLink)<NavLinkProps>`
     color: ${theme.colors.orange};
     background-color: ${theme.colors.lightYellow};
     font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
   }
 `;
 

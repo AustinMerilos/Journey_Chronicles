@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SidebarNav from "./SidebarNav";
 import { FaInfoCircle, FaPlaneDeparture } from "react-icons/fa";
 import { MdOutlineTipsAndUpdates, MdOutlineCabin } from "react-icons/md";
@@ -14,7 +14,10 @@ import {
   HeroSubText,
   HeroText,
   MainContent,
+  MobileOverlay,
+  MobileSidebarToggleButton,
 } from "../styles/LayoutStyles";
+import { FaMountainSun } from "react-icons/fa6";
 
 type LayoutProps = {
   blurb?: string;
@@ -69,23 +72,65 @@ const Layout: React.FC<LayoutProps> = ({
   children,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setSidebarVisible(true);
+        setCollapsed(false);
+      } else {
+        setSidebarVisible(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleSidebarVisibility = () => setSidebarVisible((v) => !v);
+
+  const toggleCollapse = () => setCollapsed((c) => !c);
 
   return (
     <>
-      <>
+      {isMobile && !sidebarVisible && (
+        <MobileSidebarToggleButton
+          onClick={toggleSidebarVisibility}
+          aria-label="Open sidebar"
+        >
+          <FaMountainSun />
+        </MobileSidebarToggleButton>
+      )}
+
+      {sidebarVisible && (
         <SidebarNav
           items={navItems}
           logo={logo}
-          collapsed={collapsed}
-          onLogoClick={() => setCollapsed((prev) => !prev)}
+          collapsed={collapsed && !isMobile}
+          visible={sidebarVisible}
+          onLogoClick={() => {
+            if (isMobile) setSidebarVisible(false);
+            else toggleCollapse();
+          }}
         />
-        <HeroSection backgroundImage={images.banner} $collapsed={collapsed}>
-          <HeroContent>
-            <HeroText>{companyName}</HeroText>
-            <HeroSubText>{blurb}</HeroSubText>
-          </HeroContent>
-        </HeroSection>
-      </>
+      )}
+
+      {isMobile && sidebarVisible && (
+        <MobileOverlay onClick={() => setSidebarVisible(false)} />
+      )}
+
+      <HeroSection backgroundImage={images.banner} $collapsed={collapsed}>
+        <HeroContent>
+          <HeroText>{companyName}</HeroText>
+          <HeroSubText>{blurb}</HeroSubText>
+        </HeroContent>
+      </HeroSection>
 
       <ContentWrapper $collapsed={collapsed}>
         <MainContent>{children}</MainContent>

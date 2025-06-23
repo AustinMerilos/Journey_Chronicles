@@ -17,18 +17,20 @@ type NavItem = {
   border?: string;
 };
 
-type NavBarProps = {
+type SidebarNavProps = {
   items: NavItem[];
   logo?: React.ReactNode;
   collapsed: boolean;
   onLogoClick?: () => void;
+  visible: boolean;
 };
 
-const SidebarNav: React.FC<NavBarProps> = ({
+const SidebarNav: React.FC<SidebarNavProps> = ({
   items,
   logo,
   collapsed,
   onLogoClick,
+  visible,
 }) => {
   return (
     <Aside $collapsed={collapsed}>
@@ -45,7 +47,7 @@ const SidebarNav: React.FC<NavBarProps> = ({
           >
             <NavLink to={href} $borderColor={border}>
               <IconWrapper>{icon}</IconWrapper>
-              {!collapsed && <Label>{label}</Label>}
+              {!collapsed && <Label $collapsed={collapsed}>{label}</Label>}
             </NavLink>
           </motion.li>
         ))}

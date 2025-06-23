@@ -16,11 +16,16 @@ const ContentWrapper = styled.div<{ $collapsed: boolean }>`
 
   @media (max-width: 768px) {
     margin-left: 0;
+    padding: 1rem;
   }
 `;
 
 const MainContent = styled.main`
   padding: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
 `;
 
 const HeroSection = styled.section<{
@@ -43,9 +48,10 @@ const HeroSection = styled.section<{
 
   @media (max-width: 768px) {
     margin-left: 0;
+    padding: 2rem 1rem;
+    min-height: 60vh;
   }
 
-  /* Dark overlay over entire image */
   &::after {
     content: "";
     position: absolute;
@@ -54,7 +60,6 @@ const HeroSection = styled.section<{
     z-index: 1;
   }
 
-  /* Bottom fade overlay */
   &::before {
     content: "";
     position: absolute;
@@ -73,6 +78,10 @@ const HeroContent = styled.div`
   z-index: 2;
   max-width: 900px;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const HeroText = styled.h1`
@@ -81,8 +90,8 @@ const HeroText = styled.h1`
   margin-bottom: 1rem;
   color: ${theme.colors.lightYellow};
 
-  @media (min-width: 768px) {
-    font-size: 4rem;
+  @media (max-width: 768px) {
+    font-size: 2rem;
   }
 `;
 
@@ -92,6 +101,11 @@ const HeroSubText = styled.p`
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    max-width: 100%;
+  }
 `;
 
 const HeroImage = styled.img`
@@ -100,7 +114,51 @@ const HeroImage = styled.img`
   height: auto;
   border-radius: 1rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
+
+const MobileSidebarToggleButton = styled.button`
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1200;
+  background-color: ${theme.colors.softYellow};
+  color: ${theme.colors.darkGreen};
+  border: none;
+  border-radius: 30%;
+  padding: 0.75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: ${theme.colors.orange};
+    transform: scale(1.05);
+  }
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
+const MobileOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1090;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
 export {
   HeroContent,
   HeroImage,
@@ -109,4 +167,6 @@ export {
   HeroText,
   MainContent,
   ContentWrapper,
+  MobileOverlay,
+  MobileSidebarToggleButton,
 };
