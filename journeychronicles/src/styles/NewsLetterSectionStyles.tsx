@@ -6,7 +6,7 @@ const NewsletterContainer = styled.div`
   margin: 5rem auto;
   padding: 2rem;
   text-align: center;
-  background-color: #fff8e1;
+  background-color: ${theme.colors.lightYellow};
   border-radius: 1rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 `;
