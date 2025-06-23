@@ -33,6 +33,7 @@ const HeroSection = styled.section<{
   background-repeat: no-repeat;
   min-height: 50vh;
   position: relative;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;

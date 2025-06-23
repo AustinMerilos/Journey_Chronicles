@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AboutPage from "./components/AboutPage";
 import HompePage from "./components/HomePage";
 import DestinationsPage from "./components/DestinationsPage";
+import ContactPage from "./components/ContactPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/home" element={<HompePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/destinations" element={<DestinationsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Layout>
     </Router>
