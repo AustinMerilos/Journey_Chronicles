@@ -72,18 +72,21 @@ const Layout: React.FC<LayoutProps> = ({
 
   return (
     <>
-      <SidebarNav
-        items={navItems}
-        logo={logo}
-        collapsed={collapsed}
-        onLogoClick={() => setCollapsed((prev) => !prev)}
-      />
-      <HeroSection backgroundImage={images.banner} $collapsed={collapsed}>
-        <HeroContent>
-          <HeroText>{companyName}</HeroText>
-          <HeroSubText>{blurb}</HeroSubText>
-        </HeroContent>
-      </HeroSection>
+      <>
+        <SidebarNav
+          items={navItems}
+          logo={logo}
+          collapsed={collapsed}
+          onLogoClick={() => setCollapsed((prev) => !prev)}
+        />
+        <HeroSection backgroundImage={images.banner} $collapsed={collapsed}>
+          <HeroContent>
+            <HeroText>{companyName}</HeroText>
+            <HeroSubText>{blurb}</HeroSubText>
+          </HeroContent>
+        </HeroSection>
+      </>
+
       <ContentWrapper $collapsed={collapsed}>
         <MainContent>{children}</MainContent>
         <Footer />
