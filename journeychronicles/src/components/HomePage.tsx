@@ -4,7 +4,7 @@ import { parseHTMLContent } from "../utils/parseHtmlContent";
 import {
   HomePageContainer,
   Paragraph,
-  ProfileImage,
+  Image,
   Subtitle,
   Title,
   ZSection,
@@ -46,7 +46,7 @@ const HomePage = () => {
 
       {images.map(({ src, alt }, i) => (
         <ZSection key={i} reverse={i % 2 !== 0}>
-          <ProfileImage src={src} alt={alt} />
+          <Image src={src} alt={alt} />
           <Paragraph
             dangerouslySetInnerHTML={{
               __html: paragraphs[i] || "Missing paragraph content",

@@ -36,7 +36,7 @@ export const Paragraph = styled.p`
   color: #333;
 `;
 
-export const ProfileImage = styled.img`
+export const Image = styled.img`
   width: 100%;
   max-width: 500px;
   height: auto;
@@ -55,7 +55,7 @@ export const ZSection = styled.div<{ reverse?: boolean }>`
     flex-direction: column;
   }
 
-  ${ProfileImage} {
+  ${Image} {
     flex: 1;
   }
 
