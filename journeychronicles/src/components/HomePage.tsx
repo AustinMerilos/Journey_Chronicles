@@ -4,11 +4,10 @@ import { parseHTMLContent } from "../utils/parseHtmlContent";
 import {
   HomePageContainer,
   Paragraph,
-  ProfileImage,
-  Section,
-  SectionTitle,
+  Image,
   Subtitle,
   Title,
+  ZSection,
 } from "../styles/HomepageStyles";
 
 const HomePage = () => {
@@ -46,20 +45,15 @@ const HomePage = () => {
       ))}
 
       {images.map(({ src, alt }, i) => (
-        <ProfileImage key={i} src={src} alt={alt} />
+        <ZSection key={i} reverse={i % 2 !== 0}>
+          <Image src={src} alt={alt} />
+          <Paragraph
+            dangerouslySetInnerHTML={{
+              __html: paragraphs[i] || "Missing paragraph content",
+            }}
+          />
+        </ZSection>
       ))}
-
-      <Section>
-        <SectionTitle>Who We Are</SectionTitle>
-        {paragraphs.map((html, i) => (
-          <Paragraph key={i} dangerouslySetInnerHTML={{ __html: html }} />
-        ))}
-      </Section>
-
-      <Section>
-        <SectionTitle>Home page title</SectionTitle>
-        <Paragraph>Home page paragraph</Paragraph>
-      </Section>
     </HomePageContainer>
   );
 };

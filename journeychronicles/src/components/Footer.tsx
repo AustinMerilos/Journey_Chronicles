@@ -1,5 +1,6 @@
 import React from "react";
 import { FooterContainer } from "../styles/Footer";
+import Newsletter from "./NewsLetter";
 
 type FooterProps = {
   year?: number;
@@ -12,6 +13,7 @@ const Footer: React.FC<FooterProps> = ({
 }) => {
   return (
     <FooterContainer>
+      <Newsletter />
       <p>
         &copy; {year} {companyName}. All rights reserved.
       </p>
