@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 import { theme } from "./Constants";
 
 const NewsletterContainer = styled.div`
-  max-width: 600px;
   margin: 5rem auto;
   padding: 2rem;
   text-align: center;
