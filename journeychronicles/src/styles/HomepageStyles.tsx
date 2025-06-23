@@ -1,57 +1,65 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
+import { theme } from "./Constants";
 
-const HomePageContainer = styled.div`
+export const HomePageContainer = styled.div`
   padding: 4rem 2rem;
-  background-color: #fff;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 `;
 
-const Section = styled.section`
-  margin-top: 3rem;
+export const Title = styled.h1`
+  font-size: 3rem;
+  text-align: center;
+  color: ${theme.colors.darkGreen};
 `;
 
-const Title = styled.h1`
-  font-size: 2.5rem;
+export const Subtitle = styled.h2`
+  font-size: 2rem;
+  text-align: center;
+  color: ${theme.colors.orange};
+`;
+
+export const Section = styled.section`
+  padding: 2rem 0;
+`;
+
+export const SectionTitle = styled.h3`
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: ${theme.colors.orange};
+`;
+
+export const Paragraph = styled.p`
+  font-size: 1.125rem;
+  line-height: 1.8;
   color: #333;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
 `;
 
-const SectionTitle = styled.h2`
-  font-size: 1.8rem;
-  color: #444;
-  margin-bottom: 1rem;
-  font-weight: 600;
-`;
-
-const Subtitle = styled.h3`
-  font-size: 1.4rem;
-  color: #666;
-  margin-bottom: 1rem;
-`;
-
-const Paragraph = styled.p`
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-`;
-
-const ProfileImage = styled.img`
-  max-width: 100%;
+export const ProfileImage = styled.img`
+  width: 100%;
+  max-width: 500px;
   height: auto;
   border-radius: 1rem;
-  margin: 1rem 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 `;
 
-export {
-  ProfileImage,
-  Paragraph,
-  Subtitle,
-  Section,
-  SectionTitle,
-  HomePageContainer,
-  Title,
-};
+export const ZSection = styled.div<{ reverse?: boolean }>`
+  display: flex;
+  flex-direction: ${({ reverse }) => (reverse ? "row-reverse" : "row")};
+  align-items: center;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  ${ProfileImage} {
+    flex: 1;
+  }
+
+  ${Paragraph} {
+    flex: 1;
+  }
+`;
