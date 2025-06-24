@@ -51,8 +51,8 @@ const navItems = [
     border: theme.colors.orange,
   },
   {
-    label: "Contact",
-    href: "/contact",
+    label: "Map",
+    href: "/map",
     icon: <IoMdContact />,
     border: theme.colors.softYellow,
   },

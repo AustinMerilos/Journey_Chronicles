@@ -1,6 +1,7 @@
 import React from "react";
 import { FooterContainer } from "../styles/Footer";
 import Newsletter from "./NewsLetter";
+import MapComponent from "../utils/map";
 
 type FooterProps = {
   year?: number;
