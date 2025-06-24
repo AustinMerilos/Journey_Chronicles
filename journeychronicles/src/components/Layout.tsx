@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SidebarNav from "./SidebarNav";
-import { FaInfoCircle, FaPlaneDeparture } from "react-icons/fa";
+import { FaInfoCircle, FaPlaneDeparture, FaMapMarkedAlt } from "react-icons/fa";
 import { MdOutlineTipsAndUpdates, MdOutlineCabin } from "react-icons/md";
-import { IoMdContact } from "react-icons/io";
 
 import images from "../assets";
 import { theme } from "../styles/Constants";
@@ -45,16 +44,16 @@ const navItems = [
     border: theme.colors.softYellow,
   },
   {
+    label: "Map",
+    href: "/map",
+    icon: <FaMapMarkedAlt />,
+    border: theme.colors.softYellow,
+  },
+  {
     label: "About",
     href: "/about",
     icon: <FaInfoCircle />,
     border: theme.colors.orange,
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-    icon: <IoMdContact />,
-    border: theme.colors.softYellow,
   },
 ];
 
