@@ -11,31 +11,27 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-const defaultPosition: [number, number] = [40.7128, -74.006];
-const locations = [
-  {
-    id: 1,
-    title: "New York",
-    lat: 40.7128,
-    lng: -74.006,
-    image: "",
-    url: "",
-  },
-  {
-    id: 2,
-    title: "Paris",
-    lat: 48.8566,
-    lng: 2.3522,
-    image: "",
-    url: "",
-  },
-];
+interface Location {
+  id: number;
+  title: string;
+  lat: number;
+  lng: number;
+  image: string;
+  url: string;
+  region: string;
+}
 
-const MapComponent: React.FC = () => {
+interface MapComponentProps {
+  locations: Location[];
+}
+
+const defaultPosition: [number, number] = [40.7128, -74.006];
+
+const MapComponent: React.FC<MapComponentProps> = ({ locations }) => {
   return (
     <MapContainer
       center={defaultPosition}
-      zoom={5}
+      zoom={3}
       scrollWheelZoom={true}
       style={{ height: "600px", width: "100%", borderRadius: "1rem" }}
     >
@@ -48,19 +44,23 @@ const MapComponent: React.FC = () => {
         <Marker key={loc.id} position={[loc.lat, loc.lng]}>
           <Popup>
             <div style={{ maxWidth: "200px" }}>
-              <img
-                src={loc.image}
-                alt={loc.title}
-                style={{
-                  width: "100%",
-                  borderRadius: "8px",
-                  marginBottom: "0.5rem",
-                }}
-              />
+              {loc.image && (
+                <img
+                  src={loc.image}
+                  alt={loc.title}
+                  style={{
+                    width: "100%",
+                    borderRadius: "8px",
+                    marginBottom: "0.5rem",
+                  }}
+                />
+              )}
               <h3>{loc.title}</h3>
-              <a href={loc.url} target="_blank" rel="noopener noreferrer">
-                Check Out
-              </a>
+              {loc.url && (
+                <a href={loc.url} target="_blank" rel="noopener noreferrer">
+                  Check Out
+                </a>
+              )}
             </div>
           </Popup>
         </Marker>
