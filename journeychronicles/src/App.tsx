@@ -8,6 +8,7 @@ import HompePage from "./components/HomePage";
 import DestinationsPage from "./components/DestinationsPage";
 import ContactPage from "./components/ContactPage";
 import MapPage from "./components/MapPage";
+import TravelTipsPage from "./components/TravelTips";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/destinations" element={<DestinationsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/map" element={<MapPage />} />
+          <Route path="/tips" element={<TravelTipsPage />} />
         </Routes>
       </Layout>
     </Router>
