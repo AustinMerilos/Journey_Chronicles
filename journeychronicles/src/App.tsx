@@ -9,11 +9,13 @@ import DestinationsPage from "./components/DestinationsPage";
 import ContactPage from "./components/ContactPage";
 import MapPage from "./components/MapPage";
 import TravelTipsPage from "./components/TravelTips";
+import ScrollToTop from "./utils/scrollToTop";
 
 function App() {
   return (
     <Router>
       <Layout>
+        <ScrollToTop />
         <Routes>
           <Route path="/home" element={<HompePage />} />
           <Route path="/about" element={<AboutPage />} />
