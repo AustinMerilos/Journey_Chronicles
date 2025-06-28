@@ -4,12 +4,6 @@ import MapComponent from "../utils/map";
 import Timeline from "../utils/timeline";
 import MapFilterSidebar from "../utils/mapFilters";
 
-const filterOptions = [
-  { label: "All", value: "all" },
-  { label: "Europe", value: "europe" },
-  { label: "Asia", value: "asia" },
-];
-
 type TripData = {
   id: number;
   title: string;
@@ -19,6 +13,7 @@ type TripData = {
   lat: number;
   lng: number;
   region: string;
+  type: string;
   image: string;
   url: string;
 };
@@ -29,8 +24,39 @@ const extractCoordsFromContent = (content: string): [number, number] | null => {
   return null;
 };
 
+const getRegionFromTags = (tags: any): string => {
+  if (tags?.europe) return "europe";
+  if (tags?.asia) return "asia";
+  if (tags?.["north-america"]) return "north-america";
+  if (tags?.africa) return "africa";
+  return "unknown";
+};
+
+const getTypeFromTags = (tags: any): string => {
+  if (tags?.city) return "city";
+  if (tags?.beach) return "beach";
+  if (tags?.park) return "park";
+  return "other";
+};
+
+const regionOptions = [
+  { label: "All Regions", value: "all" },
+  { label: "Europe", value: "europe" },
+  { label: "Asia", value: "asia" },
+  { label: "North America", value: "north-america" },
+  { label: "Africa", value: "africa" },
+];
+
+const typeOptions = [
+  { label: "All Types", value: "all" },
+  { label: "City", value: "city" },
+  { label: "Beach", value: "beach" },
+  { label: "Park", value: "park" },
+];
+
 const MapPage: React.FC = () => {
-  const [filter, setFilter] = useState("all");
+  const [regionFilter, setRegionFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState("all");
   const [tripData, setTripData] = useState<TripData[]>([]);
 
   useEffect(() => {
@@ -47,7 +73,8 @@ const MapPage: React.FC = () => {
             const coords = extractCoordsFromContent(post.content);
             if (!coords) return null;
 
-            const region = post.tags?.europe ? "europe" : "asia";
+            const region = getRegionFromTags(post.tags);
+            const type = getTypeFromTags(post.tags);
 
             return {
               id: post.ID,
@@ -58,6 +85,7 @@ const MapPage: React.FC = () => {
               lat: coords[0],
               lng: coords[1],
               region,
+              type,
               image: post.featured_image || "",
               url: post.URL,
             };
@@ -73,18 +101,29 @@ const MapPage: React.FC = () => {
     fetchPosts();
   }, []);
 
-  const filteredTrips =
-    filter === "all"
-      ? tripData
-      : tripData.filter((trip) => trip.region === filter);
+  const filteredTrips = tripData.filter((trip) => {
+    const regionMatch = regionFilter === "all" || trip.region === regionFilter;
+    const typeMatch = typeFilter === "all" || trip.type === typeFilter;
+    return regionMatch && typeMatch;
+  });
 
   return (
     <div style={{ display: "flex", gap: "2rem", position: "relative" }}>
-      <MapFilterSidebar
-        options={filterOptions}
-        selected={filter}
-        onChange={(val) => setFilter(val)}
-      />
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <MapFilterSidebar
+          title="Filter by Region"
+          options={regionOptions}
+          selected={regionFilter}
+          onChange={setRegionFilter}
+        />
+        <MapFilterSidebar
+          title="Filter by Type"
+          options={typeOptions}
+          selected={typeFilter}
+          onChange={setTypeFilter}
+        />
+      </div>
+
       <div style={{ flex: 1 }}>
         <h1>Journey Map</h1>
         <MapComponent locations={filteredTrips} />
