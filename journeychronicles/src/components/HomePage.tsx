@@ -9,6 +9,7 @@ import {
   Title,
   ZSection,
 } from "../styles/HomepageStyles";
+import FeaturedCard from "../utils/featuredCard";
 
 const HomePage = () => {
   const [title, setTitle] = useState("");
@@ -54,6 +55,12 @@ const HomePage = () => {
           />
         </ZSection>
       ))}
+      <FeaturedCard
+        title={"Feature"}
+        image={""}
+        excerpt={"Check out the newest adventure"}
+        link={""}
+      />
     </HomePageContainer>
   );
 };
