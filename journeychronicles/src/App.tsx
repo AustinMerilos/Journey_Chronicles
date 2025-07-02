@@ -10,6 +10,9 @@ import ContactPage from "./components/ContactPage";
 import MapPage from "./components/MapPage";
 import TravelTipsPage from "./components/TravelTips";
 import ScrollToTop from "./utils/scrollToTop";
+import PostPage from "./components/PostPage";
+
+// inside <Routes>
 
 function App() {
   return (
@@ -17,6 +20,7 @@ function App() {
       <Layout>
         <ScrollToTop />
         <Routes>
+          <Route path="/post/:id" element={<PostPage />} />;
           <Route path="/home" element={<HompePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/destinations" element={<DestinationsPage />} />

@@ -73,7 +73,7 @@ const DestinationsPage: React.FC = () => {
             )}
 
             <ReadMoreLink
-              href={post.URL}
+              href={`/post/${post.ID}`}
               target="_blank"
               rel="noopener noreferrer"
             >

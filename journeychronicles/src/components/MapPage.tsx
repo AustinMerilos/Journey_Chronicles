@@ -180,6 +180,7 @@ const MapPage: React.FC = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+      <h1>Journey Map</h1>
       <MapFilterSidebar
         filters={filterGroups}
         selectedFilters={filters}
@@ -187,7 +188,6 @@ const MapPage: React.FC = () => {
       />
 
       <div>
-        <h1>Journey Map</h1>
         <MapComponent locations={filteredTrips} />
         <Timeline items={filteredTrips} />
       </div>
