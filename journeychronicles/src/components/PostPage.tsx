@@ -3,100 +3,99 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Slider from "react-slick";
 import styled from "styled-components";
+import { parseHTMLContent } from "../utils/parseHtmlContent";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const PostWrapper = styled.div`
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
 `;
 
-const Title = styled.h1`
-  margin-bottom: 1rem;
+const CarouselImage = styled.img`
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 1rem;
 `;
 
-const CarouselWrapper = styled.div`
-  margin-bottom: 2rem;
-
-  .slick-slide img {
-    width: 100%;
-    border-radius: 12px;
-  }
+const PostTitle = styled.h1`
+  font-size: 2rem;
+  margin-top: 2rem;
 `;
 
-const Content = styled.div`
+const PostContent = styled.div`
+  margin-top: 1.5rem;
   line-height: 1.7;
-  p {
-    margin-bottom: 1rem;
+  font-size: 1.1rem;
+
+  img {
+    display: none;
   }
 `;
 
-type PostType = {
+interface Post {
+  ID: number;
   title: string;
   content: string;
-  images: string[];
-};
-
-const extractImagesFromContent = (html: string): string[] => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-  const imgs = Array.from(doc.querySelectorAll("img")).map((img) =>
-    img.getAttribute("src")
-  );
-  return imgs.filter(Boolean) as string[];
-};
+  date: string;
+}
 
 const PostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [post, setPost] = useState<PostType | null>(null);
+  const [post, setPost] = useState<Post | null>(null);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(
+        const response = await axios.get(
           `https://public-api.wordpress.com/rest/v1.1/sites/journeychronicles4.wordpress.com/posts/${id}`
         );
-        const post = res.data;
-
-        const images = extractImagesFromContent(post.content);
-
-        setPost({
-          title: post.title,
-          content: post.content,
-          images,
-        });
-      } catch (err) {
-        console.error("Error fetching post", err);
+        setPost(response.data);
+      } catch (error) {
+        console.error("Error fetching post:", error);
       }
     };
 
     fetchPost();
   }, [id]);
 
-  if (!post) return <p>Loading...</p>;
+  if (!post) return <p>Loading post...</p>;
+
+  const { images } = parseHTMLContent(post.content);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+  };
 
   return (
     <PostWrapper>
-      <Title>{post.title}</Title>
+      {images.length > 1 ? (
+        <Slider {...sliderSettings}>
+          {images.map((img, index) => (
+            <div key={index}>
+              <CarouselImage src={img.src} alt={`Slide ${index + 1}`} />
+            </div>
+          ))}
+        </Slider>
+      ) : images.length === 1 ? (
+        <CarouselImage src={images[0].src} alt="Post image" />
+      ) : null}
 
-      {post.images.length > 0 && (
-        <CarouselWrapper>
-          <Slider
-            dots={true}
-            infinite
-            speed={500}
-            slidesToShow={1}
-            slidesToScroll={1}
-          >
-            {post.images.map((src, idx) => (
-              <div key={idx}>
-                <img src={src} alt={`Slide ${idx + 1}`} />
-              </div>
-            ))}
-          </Slider>
-        </CarouselWrapper>
-      )}
+      <PostTitle dangerouslySetInnerHTML={{ __html: post.title }} />
 
-      <Content dangerouslySetInnerHTML={{ __html: post.content }} />
+      <PostContent
+        dangerouslySetInnerHTML={{
+          __html: post.content,
+        }}
+      />
     </PostWrapper>
   );
 };
