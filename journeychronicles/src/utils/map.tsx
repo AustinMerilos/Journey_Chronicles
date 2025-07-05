@@ -56,11 +56,13 @@ const MapComponent: React.FC<MapComponentProps> = ({ locations }) => {
                 />
               )}
               <h3>{loc.title}</h3>
-              {loc.url && (
-                <a href={loc.url} target="_blank" rel="noopener noreferrer">
-                  Check Out
-                </a>
-              )}
+              <a
+                href={`/post/${loc.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Check Out
+              </a>
             </div>
           </Popup>
         </Marker>
