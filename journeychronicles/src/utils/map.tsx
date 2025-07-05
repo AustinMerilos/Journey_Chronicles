@@ -36,8 +36,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ locations }) => {
       style={{ height: "600px", width: "100%", borderRadius: "1rem" }}
     >
       <TileLayer
-        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
 
       {locations.map((loc) => (
