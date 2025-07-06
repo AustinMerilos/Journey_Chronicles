@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../styles/Constants";
+import { parseHTMLContent } from "../utils/parseHtmlContent";
 
 interface TimelineItem {
   id: number;
@@ -72,18 +73,28 @@ const EntryLink = styled.a`
 const Timeline: React.FC<TimelineProps> = ({ items }) => {
   return (
     <TimelineContainer>
-      {items.map(({ id, title, date, description, link }) => (
-        <TimelineEntry key={id}>
-          <EntryTitle>{title}</EntryTitle>
-          <EntryDate>{date}</EntryDate>
-          <EntryDescription>{description}</EntryDescription>
-          {link && (
-            <EntryLink href={link} target="_blank" rel="noopener noreferrer">
-              Read more →
-            </EntryLink>
-          )}
-        </TimelineEntry>
-      ))}
+      {items.map((item) => {
+        const { titles, paragraphs } = parseHTMLContent(item.description);
+
+        return (
+          <TimelineEntry key={item.id}>
+            <EntryTitle>{titles[0] || item.title}</EntryTitle>
+            <EntryDate>{item.date}</EntryDate>
+            <EntryDescription>
+              {paragraphs[0] || item.description}
+            </EntryDescription>
+            {item.link && (
+              <EntryLink
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read more →
+              </EntryLink>
+            )}
+          </TimelineEntry>
+        );
+      })}
     </TimelineContainer>
   );
 };
