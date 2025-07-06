@@ -19,6 +19,10 @@ interface Location {
   image: string;
   url: string;
   region: string;
+  duration?: string;
+  tripType?: string;
+  type?: string;
+  season?: string;
 }
 
 interface MapComponentProps {

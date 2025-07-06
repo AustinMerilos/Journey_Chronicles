@@ -42,19 +42,14 @@ const getTypeFromTags = (tags: any): string => {
   return "other";
 };
 
+const validOptions: Record<string, string[]> = {
+  season: ["spring", "summer", "fall", "winter"],
+  duration: ["weekend", "week", "extended"],
+  tripType: ["solo", "couples", "group"],
+};
+
 const getOtherFromTags = (tags: any, key: string): string => {
-  const values = [
-    "spring",
-    "summer",
-    "fall",
-    "winter",
-    "weekend",
-    "week",
-    "extended",
-    "solo",
-    "couples",
-    "group",
-  ];
+  const values = validOptions[key] || [];
   return values.find((val) => tags?.[val]) || "unspecified";
 };
 
