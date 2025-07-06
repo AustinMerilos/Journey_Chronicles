@@ -7,7 +7,7 @@ import {
   ReadMoreLink,
   DestinationsPageCard,
   DestinationsPageTitle,
-} from "../styles/DestinationsPage";
+} from "../styles/DestinationsPageStyles";
 import { parseHTMLContent } from "../utils/parseHtmlContent";
 
 interface Post {
@@ -72,11 +72,7 @@ const DestinationsPage: React.FC = () => {
               />
             )}
 
-            <ReadMoreLink
-              href={`/post/${post.ID}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <ReadMoreLink href={`/post/${post.ID}`} rel="noopener noreferrer">
               Read More →
             </ReadMoreLink>
           </DestinationsPageCard>
