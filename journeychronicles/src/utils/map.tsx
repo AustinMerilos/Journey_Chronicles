@@ -36,12 +36,20 @@ const MapComponent: React.FC<MapComponentProps> = ({ locations }) => {
     <MapContainer
       center={defaultPosition}
       zoom={3}
+      minZoom={2}
       scrollWheelZoom={true}
       style={{ height: "600px", width: "100%", borderRadius: "1rem" }}
+      worldCopyJump={false}
+      maxBounds={[
+        [-85, -180],
+        [85, 180],
+      ]}
+      maxBoundsViscosity={1.0}
     >
       <TileLayer
         attribution='&copy; <a href="https://carto.com/">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        noWrap={true}
       />
 
       {locations.map((loc) => (
