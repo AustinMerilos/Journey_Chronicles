@@ -84,11 +84,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               {paragraphs[0] || item.description}
             </EntryDescription>
             {item.link && (
-              <EntryLink
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <EntryLink href={`/post/${item.id}`} rel="noopener noreferrer">
                 Read more →
               </EntryLink>
             )}
