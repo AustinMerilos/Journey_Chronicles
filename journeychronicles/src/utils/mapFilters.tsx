@@ -10,9 +10,10 @@ type FilterGroup = {
 
 interface MapFilterSidebarProps {
   filters: FilterGroup[];
-  selectedFilters: Record<string, string>;
+  selectedFilters: Record<string, string[]>;
   onChange: (group: string, value: string) => void;
 }
+
 const SidebarWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -36,6 +37,7 @@ const FilterList = styled.ul`
   padding: 0;
   margin: 0;
 `;
+
 const FilterGroups = styled.div`
   display: flex;
   flex-direction: column;
@@ -69,7 +71,7 @@ const MapFilterSidebar: React.FC<MapFilterSidebarProps> = ({
             {group.options.map((opt) => (
               <FilterItem
                 key={opt.value}
-                active={selectedFilters[group.name] === opt.value}
+                active={selectedFilters[group.name]?.includes(opt.value)}
                 onClick={() => onChange(group.name, opt.value)}
               >
                 {opt.label}
