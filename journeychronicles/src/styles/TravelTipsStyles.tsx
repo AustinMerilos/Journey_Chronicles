@@ -6,10 +6,10 @@ const PageWrapper = styled.div`
 `;
 
 const HeroSection = styled.section`
-  background-color: ${theme.colors.softYellow};
   padding: 2rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
+  justify-items: center;
 
   h1 {
     color: ${theme.colors.darkGreen};
