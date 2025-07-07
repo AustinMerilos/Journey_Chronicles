@@ -68,11 +68,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ locations }) => {
                 />
               )}
               <h3>{loc.title}</h3>
-              <a
-                href={`/post/${loc.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={`/post/${loc.id}`} rel="noopener noreferrer">
                 Check Out
               </a>
             </div>

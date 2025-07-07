@@ -19,6 +19,7 @@ type TripData = {
   tripType?: string;
   image: string;
   url: string;
+  content: string;
 };
 
 const extractCoordsFromContent = (content: string): [number, number] | null => {
@@ -42,14 +43,19 @@ const getTypeFromTags = (tags: any): string => {
   return "other";
 };
 
-const validOptions: Record<string, string[]> = {
-  season: ["spring", "summer", "fall", "winter"],
-  duration: ["weekend", "week", "extended"],
-  tripType: ["solo", "couples", "group"],
-};
-
 const getOtherFromTags = (tags: any, key: string): string => {
-  const values = validOptions[key] || [];
+  const values = [
+    "spring",
+    "summer",
+    "fall",
+    "winter",
+    "weekend",
+    "week",
+    "extended",
+    "solo",
+    "couples",
+    "group",
+  ];
   return values.find((val) => tags?.[val]) || "unspecified";
 };
 
@@ -58,7 +64,6 @@ const filterGroups = [
     title: "Region",
     name: "region",
     options: [
-      { label: "All", value: "all" },
       { label: "Europe", value: "europe" },
       { label: "Asia", value: "asia" },
       { label: "North America", value: "north-america" },
@@ -69,7 +74,6 @@ const filterGroups = [
     title: "Location Type",
     name: "type",
     options: [
-      { label: "All", value: "all" },
       { label: "City", value: "city" },
       { label: "Beach", value: "beach" },
       { label: "Park", value: "park" },
@@ -79,7 +83,6 @@ const filterGroups = [
     title: "Season",
     name: "season",
     options: [
-      { label: "All", value: "all" },
       { label: "Spring", value: "spring" },
       { label: "Summer", value: "summer" },
       { label: "Fall", value: "fall" },
@@ -90,7 +93,6 @@ const filterGroups = [
     title: "Duration",
     name: "duration",
     options: [
-      { label: "All", value: "all" },
       { label: "Weekend", value: "weekend" },
       { label: "1 Week", value: "week" },
       { label: "2+ Weeks", value: "extended" },
@@ -100,7 +102,6 @@ const filterGroups = [
     title: "Trip Type",
     name: "tripType",
     options: [
-      { label: "All", value: "all" },
       { label: "Solo", value: "solo" },
       { label: "Couples", value: "couples" },
       { label: "Group", value: "group" },
@@ -109,12 +110,12 @@ const filterGroups = [
 ];
 
 const MapPage: React.FC = () => {
-  const [filters, setFilters] = useState({
-    region: "all",
-    type: "all",
-    season: "all",
-    duration: "all",
-    tripType: "all",
+  const [filters, setFilters] = useState<Record<string, string[]>>({
+    region: [],
+    type: [],
+    season: [],
+    duration: [],
+    tripType: [],
   });
 
   const [tripData, setTripData] = useState<TripData[]>([]);
@@ -150,6 +151,7 @@ const MapPage: React.FC = () => {
               tripType: getOtherFromTags(tags, "tripType"),
               image: post.featured_image || "",
               url: post.URL,
+              content: post.content,
             };
           })
           .filter(Boolean) as TripData[];
@@ -164,14 +166,24 @@ const MapPage: React.FC = () => {
   }, []);
 
   const handleFilterChange = (group: string, value: string) => {
-    setFilters((prev) => ({ ...prev, [group]: value }));
+    setFilters((prev) => {
+      const alreadySelected = prev[group].includes(value);
+      return {
+        ...prev,
+        [group]: alreadySelected
+          ? prev[group].filter((v) => v !== value)
+          : [...prev[group], value],
+      };
+    });
   };
 
-  const filteredTrips = tripData.filter((trip) => {
-    return Object.entries(filters).every(([key, val]) => {
-      return val === "all" || (trip as any)[key] === val;
-    });
-  });
+  const filteredTrips = tripData.filter((trip) =>
+    Object.entries(filters).every(([key, values]) => {
+      if (values.length === 0) return true;
+      const tripValue = (trip as any)[key];
+      return values.includes(tripValue);
+    })
+  );
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>

@@ -12,8 +12,6 @@ import TravelTipsPage from "./components/TravelTips";
 import ScrollToTop from "./utils/scrollToTop";
 import PostPage from "./components/PostPage";
 
-// inside <Routes>
-
 function App() {
   return (
     <Router>
