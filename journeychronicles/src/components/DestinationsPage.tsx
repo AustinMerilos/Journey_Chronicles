@@ -7,6 +7,7 @@ import {
   ReadMoreLink,
   DestinationsPageCard,
   DestinationsPageTitle,
+  Title,
 } from "../styles/DestinationsPageStyles";
 import { parseHTMLContent } from "../utils/parseHtmlContent";
 
@@ -45,6 +46,7 @@ const DestinationsPage: React.FC = () => {
 
   return (
     <div>
+      <Title>Check out our travels</Title>
       {posts.map((post) => {
         const { images, paragraphs } = parseHTMLContent(post.content);
         const imageSrc = images[0]?.src;
@@ -68,7 +70,9 @@ const DestinationsPage: React.FC = () => {
 
             {paragraphHTML && (
               <PostParagraph
-                dangerouslySetInnerHTML={{ __html: `<p>${paragraphHTML}</p>` }}
+                dangerouslySetInnerHTML={{
+                  __html: `<p>${paragraphHTML}</p>`,
+                }}
               />
             )}
 

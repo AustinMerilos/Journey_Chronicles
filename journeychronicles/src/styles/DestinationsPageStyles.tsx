@@ -16,6 +16,16 @@ export const DestinationsPageCard = styled.div`
   margin-bottom: 2rem;
 `;
 
+export const Title = styled.h1`
+  font-size: 3rem;
+  text-align: center;
+  color: ${theme.colors.darkGreen};
+
+  @media (max-width: 768px) {
+    font-size: 2.25rem;
+  }
+`;
+
 export const DestinationsPageTitle = styled.h2`
   font-size: 1.75rem;
   font-weight: bold;
