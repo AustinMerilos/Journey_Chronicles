@@ -32,7 +32,6 @@ const getRegionFromTags = (tags: any): string => {
   if (tags?.europe) return "europe";
   if (tags?.asia) return "asia";
   if (tags?.["north-america"]) return "north-america";
-  if (tags?.africa) return "africa";
   return "unknown";
 };
 
@@ -67,7 +66,6 @@ const filterGroups = [
       { label: "Europe", value: "europe" },
       { label: "Asia", value: "asia" },
       { label: "North America", value: "north-america" },
-      { label: "Africa", value: "africa" },
     ],
   },
   {

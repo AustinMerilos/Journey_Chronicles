@@ -67,7 +67,7 @@ const logo = (
 
 const Layout: React.FC<LayoutProps> = ({
   companyName = "Journey Chronicles",
-  blurb = "Just random text should be here explaining the blog",
+  blurb = "Explore Boldly. Remember Always",
   children,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
