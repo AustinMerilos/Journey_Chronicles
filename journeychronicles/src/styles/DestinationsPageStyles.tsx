@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { theme } from "./Constants";
 
-export const DestinationsPageCard = styled.div`
+const DestinationsPageCard = styled.div`
   background-color: ${theme.colors.lightYellow};
   padding: 2rem;
   border-radius: 1.25rem;
@@ -16,14 +16,24 @@ export const DestinationsPageCard = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const DestinationsPageTitle = styled.h2`
+const Title = styled.h1`
+  font-size: 3rem;
+  text-align: center;
+  color: ${theme.colors.darkGreen};
+
+  @media (max-width: 768px) {
+    font-size: 2.25rem;
+  }
+`;
+
+const DestinationsPageTitle = styled.h2`
   font-size: 1.75rem;
   font-weight: bold;
   color: ${theme.colors.darkGreen};
   margin: 0.5rem 0 1rem 0;
 `;
 
-export const PostImage = styled.img`
+const PostImage = styled.img`
   width: 100%;
   max-height: 350px;
   object-fit: cover;
@@ -31,13 +41,13 @@ export const PostImage = styled.img`
   margin-bottom: 1rem;
 `;
 
-export const PostDate = styled.p`
+const PostDate = styled.p`
   font-size: 0.9rem;
   color: ${theme.colors.orange};
   margin-bottom: 0.5rem;
 `;
 
-export const PostParagraph = styled.div`
+const PostParagraph = styled.div`
   font-size: 1rem;
   line-height: 1.6;
   color: #333;
@@ -48,7 +58,7 @@ export const PostParagraph = styled.div`
   }
 `;
 
-export const ReadMoreLink = styled.a`
+const ReadMoreLink = styled.a`
   display: inline-block;
   margin-top: 1rem;
   color: ${theme.colors.orange};
@@ -59,3 +69,12 @@ export const ReadMoreLink = styled.a`
     color: ${theme.colors.darkGreen};
   }
 `;
+export {
+  ReadMoreLink,
+  PostDate,
+  PostImage,
+  PostParagraph,
+  DestinationsPageTitle,
+  DestinationsPageCard,
+  Title,
+};
