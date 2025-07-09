@@ -9,6 +9,9 @@ import {
   DestinationsPageTitle,
   Title,
   DestinationsGrid,
+  PaginationContainer,
+  PaginationButton,
+  PageInfo,
 } from "../styles/DestinationsPageStyles";
 import { parseHTMLContent } from "../utils/parseHtmlContent";
 
@@ -98,25 +101,25 @@ const DestinationsPage: React.FC = () => {
         })}
       </DestinationsGrid>
 
-      <div style={{ marginTop: "2rem", textAlign: "center" }}>
-        <button
+      <PaginationContainer>
+        <PaginationButton
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          style={{ marginRight: "1rem" }}
         >
           Previous
-        </button>
-        <span>
+        </PaginationButton>
+
+        <PageInfo>
           Page {currentPage} of {totalPages}
-        </span>
-        <button
+        </PageInfo>
+
+        <PaginationButton
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          style={{ marginLeft: "1rem" }}
         >
           Next
-        </button>
-      </div>
+        </PaginationButton>
+      </PaginationContainer>
     </div>
   );
 };

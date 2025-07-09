@@ -85,6 +85,38 @@ const ReadMoreLink = styled.a`
     color: ${theme.colors.darkGreen};
   }
 `;
+
+const PaginationContainer = styled.div`
+  margin-top: 2rem;
+  text-align: center;
+`;
+
+const PaginationButton = styled.button`
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  background-color: ${theme.colors.orange};
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: ${theme.colors.darkGreen};
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;
+
+const PageInfo = styled.span`
+  font-weight: bold;
+  font-size: 1.1rem;
+`;
+
 export {
   ReadMoreLink,
   PostDate,
@@ -94,4 +126,7 @@ export {
   DestinationsPageCard,
   Title,
   DestinationsGrid,
+  PageInfo,
+  PaginationContainer,
+  PaginationButton,
 };
