@@ -16,6 +16,21 @@ const DestinationsPageCard = styled.div`
   margin-bottom: 2rem;
 `;
 
+const DestinationsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem 0;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr); 
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 const Title = styled.h1`
   font-size: 3rem;
   text-align: center;
@@ -39,6 +54,7 @@ const PostImage = styled.img`
   object-fit: cover;
   border-radius: 1rem;
   margin-bottom: 1rem;
+  height: clamp(180px, 25vh, 240px);
 `;
 
 const PostDate = styled.p`
@@ -77,4 +93,5 @@ export {
   DestinationsPageTitle,
   DestinationsPageCard,
   Title,
+  DestinationsGrid,
 };

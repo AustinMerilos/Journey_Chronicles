@@ -8,6 +8,7 @@ import {
   DestinationsPageCard,
   DestinationsPageTitle,
   Title,
+  DestinationsGrid,
 } from "../styles/DestinationsPageStyles";
 import { parseHTMLContent } from "../utils/parseHtmlContent";
 
@@ -19,10 +20,13 @@ interface Post {
   URL: string;
 }
 
+const POSTS_PER_PAGE = 9;
+
 const DestinationsPage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -44,44 +48,75 @@ const DestinationsPage: React.FC = () => {
   if (loading) return <p>Loading posts...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const paginatedPosts = posts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
   return (
     <div>
       <Title>Check out our travels</Title>
-      {posts.map((post) => {
-        const { images, paragraphs } = parseHTMLContent(post.content);
-        const imageSrc = images[0]?.src;
-        const paragraphHTML = paragraphs[0] || "";
 
-        return (
-          <DestinationsPageCard key={post.ID} style={{ marginBottom: "2rem" }}>
-            {imageSrc && <PostImage src={imageSrc} alt="Post visual" />}
+      <DestinationsGrid>
+        {paginatedPosts.map((post) => {
+          const { images, paragraphs } = parseHTMLContent(post.content);
+          const imageSrc = images[0]?.src;
+          const paragraphHTML = paragraphs[0] || "";
 
-            <PostDate>
-              {new Date(post.date).toLocaleDateString(undefined, {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </PostDate>
-
-            <DestinationsPageTitle
-              dangerouslySetInnerHTML={{ __html: post.title }}
-            />
-
-            {paragraphHTML && (
-              <PostParagraph
-                dangerouslySetInnerHTML={{
-                  __html: `<p>${paragraphHTML}</p>`,
-                }}
+          return (
+            <DestinationsPageCard key={post.ID}>
+              {imageSrc && <PostImage src={imageSrc} alt="Post visual" />}
+              <PostDate>
+                {new Date(post.date).toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </PostDate>
+              <DestinationsPageTitle
+                dangerouslySetInnerHTML={{ __html: post.title }}
               />
-            )}
+              {paragraphHTML && (
+                <PostParagraph
+                  dangerouslySetInnerHTML={{
+                    __html: `<p>${paragraphHTML}</p>`,
+                  }}
+                />
+              )}
+              <ReadMoreLink href={`/post/${post.ID}`} rel="noopener noreferrer">
+                Read More →
+              </ReadMoreLink>
+            </DestinationsPageCard>
+          );
+        })}
+      </DestinationsGrid>
 
-            <ReadMoreLink href={`/post/${post.ID}`} rel="noopener noreferrer">
-              Read More →
-            </ReadMoreLink>
-          </DestinationsPageCard>
-        );
-      })}
+      <div style={{ marginTop: "2rem", textAlign: "center" }}>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          style={{ marginRight: "1rem" }}
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          style={{ marginLeft: "1rem" }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

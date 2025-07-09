@@ -34,9 +34,10 @@ const HeroSection = styled.section<{
 }>`
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
-  background-position: center;
+  background-position: center 76%;
+
   background-repeat: no-repeat;
-  min-height: 50vh;
+  min-height: 15vh;
   position: relative;
   top: 0;
   display: flex;
@@ -49,7 +50,7 @@ const HeroSection = styled.section<{
   @media (max-width: 768px) {
     margin-left: 0;
     padding: 2rem 1rem;
-    min-height: 60vh;
+    min-height: 30vh;
   }
 
   &::after {
