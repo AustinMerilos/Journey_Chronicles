@@ -53,18 +53,16 @@ const AboutPage = () => {
 
       <Section>
         <SectionTitle>Who We Are</SectionTitle>
-        {paragraphs.map((html, i) => (
-          <Paragraph key={i} dangerouslySetInnerHTML={{ __html: html }} />
-        ))}
+        {paragraphs[0] && (
+          <Paragraph dangerouslySetInnerHTML={{ __html: paragraphs[0] }} />
+        )}
       </Section>
 
       <Section>
         <SectionTitle>Our Mission</SectionTitle>
-        <Paragraph>
-          Our mission is to create accessible, elegant, and meaningful solutions
-          that empower individuals and organizations. We believe in simplicity,
-          transparency, and impact-driven work.
-        </Paragraph>
+        {paragraphs[1] && (
+          <Paragraph dangerouslySetInnerHTML={{ __html: paragraphs[1] }} />
+        )}
       </Section>
 
       <CTAContainer>
