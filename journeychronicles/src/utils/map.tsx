@@ -10,7 +10,6 @@ L.Icon.Default.mergeOptions({
   iconUrl: require("leaflet/dist/images/marker-icon.png"),
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
-
 interface Location {
   id: number;
   title: string;
@@ -19,10 +18,10 @@ interface Location {
   image: string;
   url: string;
   region: string;
-  duration?: string;
-  tripType?: string;
+  duration?: string | string[];
+  tripType?: string | string[];
   type?: string;
-  season?: string;
+  season?: string | string[];
 }
 
 interface MapComponentProps {

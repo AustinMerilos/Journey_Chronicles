@@ -14,9 +14,9 @@ type TripData = {
   lng: number;
   region: string;
   type: string;
-  season?: string;
-  duration?: string;
-  tripType?: string;
+  duration?: string[];
+  tripType?: string[];
+  season?: string[];
   image: string;
   url: string;
   content: string;
@@ -42,20 +42,16 @@ const getTypeFromTags = (tags: any): string => {
   return "other";
 };
 
-const getOtherFromTags = (tags: any, key: string): string => {
-  const values = [
-    "spring",
-    "summer",
-    "fall",
-    "winter",
-    "weekend",
-    "week",
-    "extended",
-    "solo",
-    "couples",
-    "group",
-  ];
-  return values.find((val) => tags?.[val]) || "unspecified";
+const getOtherFromTags = (tags: any, key: string): string[] => {
+  const categoryValues: Record<string, string[]> = {
+    season: ["spring", "summer", "fall", "winter"],
+    duration: ["weekend", "week", "extended"],
+    tripType: ["solo", "couples", "group"],
+  };
+
+  const values = categoryValues[key] || [];
+
+  return values.filter((val) => tags?.[val]) || [];
 };
 
 const filterGroups = [
@@ -176,10 +172,16 @@ const MapPage: React.FC = () => {
   };
 
   const filteredTrips = tripData.filter((trip) =>
-    Object.entries(filters).every(([key, values]) => {
-      if (values.length === 0) return true;
-      const tripValue = (trip as any)[key];
-      return values.includes(tripValue);
+    Object.entries(filters).every(([key, selectedValues]) => {
+      if (selectedValues.length === 0) return true;
+
+      const tripValues = (trip as any)[key];
+
+      if (Array.isArray(tripValues)) {
+        return selectedValues.some((val) => tripValues.includes(val));
+      }
+
+      return selectedValues.includes(tripValues);
     })
   );
 
