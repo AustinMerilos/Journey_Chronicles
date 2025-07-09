@@ -38,15 +38,15 @@ const navItems = [
     border: theme.colors.orange,
   },
   {
-    label: "Travel Tips",
-    href: "/tips",
-    icon: <MdOutlineTipsAndUpdates />,
-    border: theme.colors.softYellow,
-  },
-  {
     label: "Map",
     href: "/map",
     icon: <FaMapMarkedAlt />,
+    border: theme.colors.softYellow,
+  },
+  {
+    label: "Travel Tips",
+    href: "/tips",
+    icon: <MdOutlineTipsAndUpdates />,
     border: theme.colors.softYellow,
   },
   {
