@@ -13,6 +13,7 @@ import {
   Textarea,
   SubmitButton,
 } from "../styles/ContactPageStyles";
+import Loader from "../utils/loader";
 
 const ContactPage = () => {
   const [title, setTitle] = useState("");
@@ -35,7 +36,7 @@ const ContactPage = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading Contact page...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>{error}</p>;
 
   const { paragraphs } = parseHTMLContent(contentHtml);

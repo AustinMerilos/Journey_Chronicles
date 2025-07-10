@@ -7,6 +7,7 @@ import { parseHTMLContent } from "../utils/parseHtmlContent";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Loader from "../utils/loader";
 
 const PostWrapper = styled.div`
   max-width: 800px;
@@ -64,7 +65,7 @@ const PostPage: React.FC = () => {
     fetchPost();
   }, [id]);
 
-  if (!post) return <p>Loading post...</p>;
+  if (!post) return <Loader />;
 
   const { images } = parseHTMLContent(post.content);
   const cleanedHTML = cleanContent(post.content);

@@ -14,6 +14,7 @@ import {
   PageInfo,
 } from "../styles/DestinationsPageStyles";
 import { parseHTMLContent } from "../utils/parseHtmlContent";
+import Loader from "../utils/loader";
 
 interface Post {
   ID: number;
@@ -48,7 +49,7 @@ const DestinationsPage: React.FC = () => {
     fetchPosts();
   }, []);
 
-  if (loading) return <p>Loading posts...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>Error: {error}</p>;
 
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);

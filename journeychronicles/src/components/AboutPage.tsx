@@ -12,6 +12,7 @@ import {
   Title,
 } from "../styles/AboutPageStyles";
 import { parseHTMLContent } from "../utils/parseHtmlContent";
+import Loader from "../utils/loader";
 
 const AboutPage = () => {
   const [title, setTitle] = useState("");
@@ -34,7 +35,7 @@ const AboutPage = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading About page...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>{error}</p>;
 
   const { titles, paragraphs, images } = parseHTMLContent(contentHtml);

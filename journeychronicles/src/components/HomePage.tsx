@@ -10,6 +10,7 @@ import {
   ZSection,
 } from "../styles/HomepageStyles";
 import FeaturedCard from "../utils/featuredCard";
+import Loader from "../utils/loader";
 
 const HomePage = () => {
   const [title, setTitle] = useState("");
@@ -32,7 +33,7 @@ const HomePage = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading About page...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>{error}</p>;
 
   const { titles, paragraphs, images } = parseHTMLContent(contentHtml);
