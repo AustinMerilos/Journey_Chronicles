@@ -55,12 +55,7 @@ const HomePage = () => {
           />
         </ZSection>
       ))}
-      <FeaturedCard
-        title={"Feature"}
-        image={""}
-        excerpt={"Check out the newest adventure"}
-        link={""}
-      />
+      <FeaturedCard />
     </HomePageContainer>
   );
 };
