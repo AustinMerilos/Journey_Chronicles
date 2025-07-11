@@ -9,6 +9,25 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Loader from "../utils/loader";
 
+const StyledSliderWrapper = styled.div`
+  .slick-dots.slick-thumb {
+    display: flex !important;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 1.5rem;
+
+    li {
+      margin: 20px;
+    }
+
+    button {
+      padding: 0;
+      border: none;
+      background: none;
+    }
+  }
+`;
+
 const PostWrapper = styled.div`
   max-width: 800px;
   margin: 0 auto;
@@ -17,9 +36,28 @@ const PostWrapper = styled.div`
 
 const CarouselImage = styled.img`
   width: 100%;
-  max-height: 500px;
+  height: 400px;
   object-fit: cover;
   border-radius: 1rem;
+`;
+
+const Thumbnail = styled.img`
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+
+  .slick-active & {
+    opacity: 1;
+    border: 2px solid orange;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const PostTitle = styled.h1`
@@ -72,6 +110,10 @@ const PostPage: React.FC = () => {
 
   const sliderSettings = {
     dots: true,
+    customPaging: (i: number) => (
+      <Thumbnail src={images[i]?.src} alt={`Thumbnail ${i + 1}`} />
+    ),
+    dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -82,24 +124,22 @@ const PostPage: React.FC = () => {
   return (
     <PostWrapper>
       {images.length > 1 ? (
-        <Slider {...sliderSettings}>
-          {images.map((img, index) => (
-            <div key={index}>
-              <CarouselImage src={img.src} alt={`Slide ${index + 1}`} />
-            </div>
-          ))}
-        </Slider>
+        <StyledSliderWrapper>
+          <Slider {...sliderSettings}>
+            {images.map((img, index) => (
+              <div key={index}>
+                <CarouselImage src={img.src} alt={`Slide ${index + 1}`} />
+              </div>
+            ))}
+          </Slider>
+        </StyledSliderWrapper>
       ) : images.length === 1 ? (
         <CarouselImage src={images[0].src} alt="Post image" />
       ) : null}
 
       <PostTitle dangerouslySetInnerHTML={{ __html: post.title }} />
 
-      <PostContent
-        dangerouslySetInnerHTML={{
-          __html: cleanedHTML,
-        }}
-      />
+      <PostContent dangerouslySetInnerHTML={{ __html: cleanedHTML }} />
     </PostWrapper>
   );
 };
