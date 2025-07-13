@@ -37,7 +37,7 @@ const PostWrapper = styled.div`
 
 const CarouselImage = styled.img`
   width: 100%;
-  max-height: 500px;
+  height: 400px;
   object-fit: cover;
   border-radius: 1rem;
   cursor: pointer;
@@ -106,10 +106,6 @@ const PostContent = styled.div`
   margin-top: 1.5rem;
   line-height: 1.7;
   font-size: 1.1rem;
-
-  img {
-    display: none;
-  }
 `;
 
 interface Post {
@@ -118,6 +114,12 @@ interface Post {
   content: string;
   date: string;
 }
+
+const cleanContent = (html: string): string => {
+  let cleaned = html.replace(/\[coords:\s*-?\d+\.?\d*,\s*-?\d+\.?\d*\]/gi, "");
+  cleaned = cleaned.replace(/<img[^>]*>/gi, "");
+  return cleaned;
+};
 
 const PostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -146,9 +148,14 @@ const PostPage: React.FC = () => {
   if (!post) return <Loader />;
 
   const { images } = parseHTMLContent(post.content);
+  const cleanedHTML = cleanContent(post.content);
 
   const sliderSettings = {
     dots: true,
+    customPaging: (i: number) => (
+      <Thumbnail src={images[i]?.src} alt={`Thumbnail ${i + 1}`} />
+    ),
+    dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -186,7 +193,7 @@ const PostPage: React.FC = () => {
       {selectedImage && (
         <>
           <FullImageOverlay onClick={() => setSelectedImage(null)}>
-            <FullImage src={selectedImage} alt="Full view of post image" />
+            <FullImage src={selectedImage} alt="Full view" />
           </FullImageOverlay>
           <CloseButton onClick={() => setSelectedImage(null)}>×</CloseButton>
         </>
