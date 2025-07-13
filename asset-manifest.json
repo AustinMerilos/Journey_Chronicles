@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Journey_Chronicles/static/css/main.92393f93.css",
+    "main.js": "/Journey_Chronicles/static/js/main.a9530767.js",
+    "static/js/453.3bb15df0.chunk.js": "/Journey_Chronicles/static/js/453.3bb15df0.chunk.js",
+    "static/media/banner.jpg": "/Journey_Chronicles/static/media/banner.d04bf45c92cee9aeb492.jpg",
+    "static/media/logo3.png": "/Journey_Chronicles/static/media/logo3.2aa399f472b7596ff734.png",
+    "static/media/slick.svg": "/Journey_Chronicles/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/Journey_Chronicles/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/Journey_Chronicles/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/Journey_Chronicles/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/Journey_Chronicles/index.html",
+    "main.92393f93.css.map": "/Journey_Chronicles/static/css/main.92393f93.css.map",
+    "main.a9530767.js.map": "/Journey_Chronicles/static/js/main.a9530767.js.map",
+    "453.3bb15df0.chunk.js.map": "/Journey_Chronicles/static/js/453.3bb15df0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92393f93.css",
+    "static/js/main.a9530767.js"
+  ]
+}
