@@ -50,23 +50,30 @@ const CTAContainer = styled.div`
   text-align: center;
 `;
 
-const ContactButton = styled.button`
+const ContactButton = styled.a`
+  display: inline-block;
   background-color: ${theme.colors.orange};
   color: white;
   padding: 0.75rem 1.5rem;
-  border: none;
   border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${theme.colors.softYellow};
-    color: ${theme.colors.darkGreen};
+    background-color: ${theme.colors.darkGreen};
   }
 `;
 
+const CenteredIntro = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
+
 export {
+  CenteredIntro,
   AboutContainer,
   Title,
   Subtitle,
