@@ -3,6 +3,8 @@ import axios from "axios";
 import MapComponent from "../utils/map";
 import Timeline from "../utils/timeline";
 import MapFilterSidebar from "../utils/mapFilters";
+import styled from "styled-components";
+import { theme } from "../styles/Constants";
 
 type TripData = {
   id: number;
@@ -21,6 +23,28 @@ type TripData = {
   url: string;
   content: string;
 };
+
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const MapAndTimelineWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const Title = styled.h1`
+  font-size: 3rem;
+  text-align: center;
+  color: ${theme.colors.darkGreen};
+
+  @media (max-width: 768px) {
+    font-size: 2.25rem;
+  }
+`;
 
 const extractCoordsFromContent = (content: string): [number, number] | null => {
   const match = content.match(/\[coords:\s*(-?\d+\.?\d*),\s*(-?\d+\.?\d*)\]/i);
@@ -186,19 +210,19 @@ const MapPage: React.FC = () => {
   );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-      <h1>Journey Map</h1>
+    <PageWrapper>
+      <Title>Journey Map</Title>
       <MapFilterSidebar
         filters={filterGroups}
         selectedFilters={filters}
         onChange={handleFilterChange}
       />
 
-      <div>
+      <MapAndTimelineWrapper>
         <MapComponent locations={filteredTrips} />
         <Timeline items={filteredTrips} />
-      </div>
-    </div>
+      </MapAndTimelineWrapper>
+    </PageWrapper>
   );
 };
 
