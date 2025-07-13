@@ -12,8 +12,7 @@
       if (!path.startsWith(repo)) {
         window.location.replace(repo + "/");
       } else {
-        const target =
-          repo + "/index.html#" + path.slice(repo.length) + search + hash;
+        const target = repo + path.slice(repo.length) + search + hash;
         window.location.replace(target);
       }
     </script>
