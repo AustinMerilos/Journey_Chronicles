@@ -8,6 +8,7 @@ import { parseHTMLContent } from "../utils/parseHtmlContent";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Loader from "../utils/loader";
+import { useEscapeKey } from "../utils/escapeKey";
 
 const StyledSliderWrapper = styled.div`
   .slick-dots.slick-thumb {
@@ -36,9 +37,10 @@ const PostWrapper = styled.div`
 
 const CarouselImage = styled.img`
   width: 100%;
-  height: 400px;
+  max-height: 500px;
   object-fit: cover;
   border-radius: 1rem;
+  cursor: pointer;
 `;
 
 const Thumbnail = styled.img`
@@ -60,6 +62,41 @@ const Thumbnail = styled.img`
   }
 `;
 
+const FullImageOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+`;
+
+const FullImage = styled.img`
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+`;
+
+const CloseButton = styled.button`
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  z-index: 10000;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+`;
+
 const PostTitle = styled.h1`
   font-size: 2rem;
   margin-top: 2rem;
@@ -69,6 +106,10 @@ const PostContent = styled.div`
   margin-top: 1.5rem;
   line-height: 1.7;
   font-size: 1.1rem;
+
+  img {
+    display: none;
+  }
 `;
 
 interface Post {
@@ -78,15 +119,10 @@ interface Post {
   date: string;
 }
 
-const cleanContent = (html: string): string => {
-  let cleaned = html.replace(/\[coords:\s*-?\d+\.?\d*,\s*-?\d+\.?\d*\]/gi, "");
-  cleaned = cleaned.replace(/<img[^>]*>/gi, "");
-  return cleaned;
-};
-
 const PostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [post, setPost] = useState<Post | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -103,17 +139,16 @@ const PostPage: React.FC = () => {
     fetchPost();
   }, [id]);
 
+  useEscapeKey(() => {
+    if (selectedImage) setSelectedImage(null);
+  });
+
   if (!post) return <Loader />;
 
   const { images } = parseHTMLContent(post.content);
-  const cleanedHTML = cleanContent(post.content);
 
   const sliderSettings = {
     dots: true,
-    customPaging: (i: number) => (
-      <Thumbnail src={images[i]?.src} alt={`Thumbnail ${i + 1}`} />
-    ),
-    dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -128,18 +163,34 @@ const PostPage: React.FC = () => {
           <Slider {...sliderSettings}>
             {images.map((img, index) => (
               <div key={index}>
-                <CarouselImage src={img.src} alt={`Slide ${index + 1}`} />
+                <CarouselImage
+                  src={img.src}
+                  alt={`Slide ${index + 1}`}
+                  onClick={() => setSelectedImage(img.src)}
+                />
               </div>
             ))}
           </Slider>
         </StyledSliderWrapper>
       ) : images.length === 1 ? (
-        <CarouselImage src={images[0].src} alt="Post image" />
+        <CarouselImage
+          src={images[0].src}
+          alt="Post image"
+          onClick={() => setSelectedImage(images[0].src)}
+        />
       ) : null}
 
       <PostTitle dangerouslySetInnerHTML={{ __html: post.title }} />
-
       <PostContent dangerouslySetInnerHTML={{ __html: cleanedHTML }} />
+
+      {selectedImage && (
+        <>
+          <FullImageOverlay onClick={() => setSelectedImage(null)}>
+            <FullImage src={selectedImage} alt="Full view of post image" />
+          </FullImageOverlay>
+          <CloseButton onClick={() => setSelectedImage(null)}>×</CloseButton>
+        </>
+      )}
     </PostWrapper>
   );
 };
