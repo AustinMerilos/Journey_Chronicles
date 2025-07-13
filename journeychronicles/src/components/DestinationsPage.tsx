@@ -94,7 +94,7 @@ const DestinationsPage: React.FC = () => {
                   }}
                 />
               )}
-              <ReadMoreLink href={`/post/${post.ID}`} rel="noopener noreferrer">
+              <ReadMoreLink to={`/post/${post.ID}`} rel="noopener noreferrer">
                 Read More →
               </ReadMoreLink>
             </DestinationsPageCard>

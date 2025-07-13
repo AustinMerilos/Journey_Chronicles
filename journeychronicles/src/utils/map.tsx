@@ -2,6 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { Link } from "react-router-dom";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 
@@ -67,9 +68,9 @@ const MapComponent: React.FC<MapComponentProps> = ({ locations }) => {
                 />
               )}
               <h3>{loc.title}</h3>
-              <a href={`/post/${loc.id}`} rel="noopener noreferrer">
+              <Link to={`/post/${loc.id}`} rel="noopener noreferrer">
                 Check Out
-              </a>
+              </Link>
             </div>
           </Popup>
         </Marker>

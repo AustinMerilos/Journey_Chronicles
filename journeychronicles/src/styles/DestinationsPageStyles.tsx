@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { theme } from "./Constants";
+import { Link } from "react-router-dom";
 
 const DestinationsPageCard = styled.div`
   background-color: ${theme.colors.lightYellow};
@@ -74,7 +75,7 @@ const PostParagraph = styled.div`
   }
 `;
 
-const ReadMoreLink = styled.a`
+const ReadMoreLink = styled(Link)`
   display: inline-block;
   margin-top: 1rem;
   color: ${theme.colors.orange};

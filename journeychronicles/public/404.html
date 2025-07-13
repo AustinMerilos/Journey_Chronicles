@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      var path = window.location.pathname;
+      var repo = "/Journey_Chronicles";
+
+      if (!path.startsWith(repo)) {
+        window.location.href = repo + "/";
+      } else {
+        window.location.href = repo + "/index.html#" + path.slice(repo.length);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "./components/Layout";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 
 import AboutPage from "./components/AboutPage";
