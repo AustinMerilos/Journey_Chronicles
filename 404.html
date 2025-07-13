@@ -2,10 +2,23 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0; url=/Journey_Chronicles/" />
+    <title>Redirecting…</title>
+    <script>
+      const repo = "/Journey_Chronicles";
+      const path = window.location.pathname;
+      const search = window.location.search;
+      const hash = window.location.hash;
+
+      if (!path.startsWith(repo)) {
+        window.location.replace(repo + "/");
+      } else {
+        const target =
+          repo + "/index.html#" + path.slice(repo.length) + search + hash;
+        window.location.replace(target);
+      }
+    </script>
   </head>
   <body>
-    <p>Redirecting to the app...</p>
+    <p>Redirecting…</p>
   </body>
 </html>
