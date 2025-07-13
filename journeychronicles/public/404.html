@@ -2,16 +2,25 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <title>Redirecting…</title>
     <script>
-      var path = window.location.pathname;
-      var repo = "/Journey_Chronicles";
+      const repo = "/Journey_Chronicles";
 
-      if (!path.startsWith(repo)) {
-        window.location.href = repo + "/";
-      } else {
-        window.location.href = repo + "/index.html#" + path.slice(repo.length);
-      }
+      const fullPath =
+        window.location.pathname +
+        window.location.search +
+        window.location.hash;
+
+      const relativePath = fullPath.startsWith(repo)
+        ? fullPath.slice(repo.length)
+        : fullPath;
+
+      window.location.replace(
+        repo + "/?redirect=" + encodeURIComponent(relativePath)
+      );
     </script>
   </head>
-  <body></body>
+  <body>
+    <p>Redirecting…</p>
+  </body>
 </html>
