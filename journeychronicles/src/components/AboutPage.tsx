@@ -10,6 +10,7 @@ import {
   SectionTitle,
   Subtitle,
   Title,
+  CenteredIntro,
 } from "../styles/AboutPageStyles";
 import { parseHTMLContent } from "../utils/parseHtmlContent";
 import Loader from "../utils/loader";
@@ -42,15 +43,15 @@ const AboutPage = () => {
 
   return (
     <AboutContainer>
-      <Title>{title}</Title>
-
-      {titles.map((html, i) => (
-        <Subtitle key={i} dangerouslySetInnerHTML={{ __html: html }} />
-      ))}
-
-      {images.map(({ src, alt }, i) => (
-        <ProfileImage key={i} src={src} alt={alt} />
-      ))}
+      <CenteredIntro>
+        <Title>{title}</Title>
+        {titles.map((html, i) => (
+          <Subtitle key={i} dangerouslySetInnerHTML={{ __html: html }} />
+        ))}
+        {images.map(({ src, alt }, i) => (
+          <ProfileImage key={i} src={src} alt={alt} />
+        ))}
+      </CenteredIntro>
 
       <Section>
         <SectionTitle>Who We Are</SectionTitle>
@@ -67,7 +68,9 @@ const AboutPage = () => {
       </Section>
 
       <CTAContainer>
-        <ContactButton>Get in Touch</ContactButton>
+        <ContactButton href="mailto:JourneyChronicles@example.com">
+          Get in Touch
+        </ContactButton>
       </CTAContainer>
     </AboutContainer>
   );
