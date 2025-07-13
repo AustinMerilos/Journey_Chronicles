@@ -14,12 +14,12 @@ import PostPage from "./components/PostPage";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Journey_Chronicles">
       <Layout>
         <ScrollToTop />
         <Routes>
-          <Route path="/post/:id" element={<PostPage />} />;
-          <Route path="/home" element={<HompePage />} />
+          <Route path="/" element={<HompePage />} />
+          <Route path="/post/:id" element={<PostPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/destinations" element={<DestinationsPage />} />
           <Route path="/contact" element={<ContactPage />} />
