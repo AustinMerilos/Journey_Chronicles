@@ -26,7 +26,6 @@ Hosted on GitHub Pages:
 - [Styled Components](https://styled-components.com/)
 - [Leaflet.js](https://leafletjs.com/)
 - [Framer Motion](https://www.framer.com/motion/)
-- [Mailchimp](https://mailchimp.com/)
 - [WordPress](https://wordpress.org/) (optional integration or inspiration)
 - [GitHub Pages](https://pages.github.com/)
 
