@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../styles/Constants";
 import { parseHTMLContent } from "../utils/parseHtmlContent";
+import { Link } from "react-router-dom";
 
 interface TimelineItem {
   id: number;
@@ -60,7 +61,7 @@ const EntryDescription = styled.p`
   color: #444;
 `;
 
-const EntryLink = styled.a`
+const EntryLink = styled(Link)`
   color: ${theme.colors.orange};
   font-weight: bold;
   text-decoration: none;
@@ -84,7 +85,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               {paragraphs[0] || item.description}
             </EntryDescription>
             {item.link && (
-              <EntryLink href={`/post/${item.id}`} rel="noopener noreferrer">
+              <EntryLink to={`/post/${item.id}`} rel="noopener noreferrer">
                 Read more →
               </EntryLink>
             )}
